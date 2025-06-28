@@ -145,7 +145,7 @@ class Shape(turtle):
 
     def pathfinding(self):
         if random.random() < 0.6:
-            self.turtle.forward(random.uniform(2, 6))
+            self.turtle.forward(random.uniform(5, 15))
         x, y = self.turtle.pos()
         width, height = self.bounds
         if abs(x) > width / 2 or abs(y) > height / 2:
