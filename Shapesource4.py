@@ -66,7 +66,7 @@ class SkyBlue(Color):
 class Shape(turtle):
     id_num = 0
     registry = {}  # shared across all Shape instances
-    def __init__(self,X,Y,heading,sides,length,gender,line_file,screen,bounds): #pass bounds from Euclydia
+    def __init__(self,X,Y,heading,sides,length,gender,line_file,screen): #pass screen from Euclydia
         self.X = X
         self.Y = Y
         self.heading = heading
@@ -74,7 +74,7 @@ class Shape(turtle):
         self.length = length
         self.gender = gender
         self.outline = self.calcpoints()
-        self.bounds = bounds
+        self.bounds = self.screen.window_width, self.screen.window_height
         self.screen = screen
         self.id_num = Shape.id_num
         Shape.registry.update({self.id_num:self})
