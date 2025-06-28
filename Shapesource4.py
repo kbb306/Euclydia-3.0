@@ -73,6 +73,7 @@ class Shape(turtle):
         self.voice = voice
         self.outline = self.calcpoints()
         self.turtle_setup(Shape.id_num)
+        self.id_num = Shape.id_num
         Shape.id_num += 1
 
     def turtle_setup(self,id_num):
@@ -119,7 +120,7 @@ class Shape(turtle):
         return self.color.__name__
     
     def sayname(self):
-         return self.name
+         return self.id_num
     
     def set_heading(self,heading):
          self.heading = int(heading)
