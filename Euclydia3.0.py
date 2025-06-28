@@ -1,8 +1,9 @@
 import turtle
 from Shapesource4 import *
+import csv
 screen = turtle.Screen()
 Euclydia = {}
-def create():
+def create(colorlist):
     print("Wlecome to the shape nursery!")
     print("------------------------------------------------------------")
     print("""   First, where would you like your shape to be placed?""")
@@ -20,6 +21,10 @@ def create():
                        
                                 Selection: """))
         
+    color = input("Select a Color (see Shapesource4.py for a list): ")
+
+
+        
     line_file = input("""   Any special phrases you'd like to define (in a text file in 'Resources')?""")
     if line_file == "":
         line_file = "Resources/phrases.txt"
@@ -28,7 +33,58 @@ def create():
 
     name = input("""    Time to name your shape: """)
     newshape = Shape(X,Y,heading,sides,length)
+    newshape.set_color(color)
     print("Rockabye",name+",","please don't you cry....")
     Euclydia.update({name:newshape})
     print("""Your shape is finished!""")
+    return Euclydia
 
+def load(colorlist):
+    with open("Resources/"+input("Enter a filename: ")) as f:
+        loader = csv.reader(f)
+        poplist = list(loader)
+        for each in poplist:
+            newshape = Shape(each[3],each[4],each[6],each[1],each[2],each[7],each[8])
+            newshape.set_color(colorlist,each[5])
+            Euclydia.update({each[0]:newshape})
+
+def save(Euclydia):
+    rows = []
+    for each in Euclydia.values():
+        color_name = each.color.__name__ if hasattr(each.color, "__name__") else "Unknown"
+        new = [each.name, each.sides, each.length, each.centerX, each.centerY, color_name, each.heading, each.gender]
+        rows.append(new)
+    
+    # Temporarily stop the turtle window to avoid conflicts
+    wn.tracer(0)  # Disable screen updates
+    wn.update()   # Ensure the screen reflects the current state
+    
+    with open(input("Enter a filename: "), 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(rows)
+    
+    print("Export complete!")
+    
+    # Resume turtle graphics
+    wn.tracer(1)
+    return
+
+def delete(Euclydia):
+    print("""Current Popoulation:""")
+    for each in list(Euclydia.keys()):
+        print(each)
+    key = "Why did you do it?"
+    while key not in list(Euclydia.keys()):
+        key = input("Select a shape: ")
+    Euclydia[key].delete()
+    del Euclydia[key]
+    return Euclydia
+
+def locate(Euclydia):
+    print("""Current Popoulation:""")
+    for each in list(Euclydia.keys()):
+        print(each)
+    key = "Why did you do it?"
+    while key not in list(Euclydia.keys()):
+        key = input("Select a shape: ")
+    print(key, "is located at", Euclydia[key].turtle.pos())
