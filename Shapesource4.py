@@ -161,7 +161,7 @@ class Shape(turtle):
             self.screen.ontimer(tick, 100 + int(random.random() * 200))
         tick()
 
-    def check_collisions(self, others, min_dist=20):
+    def collisions(self, others, min_dist=20):
         x1, y1 = self.t.pos()
         for other in others:
             if other is self:
