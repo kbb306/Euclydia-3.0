@@ -145,11 +145,11 @@ class Shape(turtle):
 
     def pathfinding(self):
         if random.random() < 0.6:
-            self.t.forward(random.uniform(2, 6))
-        x, y = self.t.pos()
+            self.turtle.forward(random.uniform(2, 6))
+        x, y = self.turtle.pos()
         width, height = self.bounds
         if abs(x) > width / 2 or abs(y) > height / 2:
-            self.t.setheading(self.t.heading() + 180)
+            self.turtle.setheading(self.t.heading() + 180)
 
     def collision(self):
         pass
