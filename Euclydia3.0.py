@@ -22,7 +22,7 @@ def create():
         
     line_file = input("""   Any special phrases you'd like to define (in a text file in 'Resources')?""")
     if line_file == "":
-        line_file = "Resources/phrases.csv"
+        line_file = "Resources/phrases.txt"
     else:
         line_file = "".join(["Resources","/", line_file])
 
