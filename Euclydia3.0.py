@@ -2,8 +2,23 @@ import turtle
 from Shapesource4 import *
 import csv
 screen = turtle.Screen()
-Euclydia = {}
-def create(colorlist):
+wn = turtle.Screen()
+height = wn.window_height()
+width = wn.window_width()
+minsize = 6.0
+wn.title("Euclydia")
+with open ("Euclydia/phrases.csv", 'r') as file:
+        soundchip = csv.reader(file)
+        talksay = list(soundchip)
+
+def get_all_subclasses(cls):
+    subclasses = []
+    for subclass in cls.__subclasses__():
+        subclasses.append(subclass)
+        subclasses.extend(get_all_subclasses(subclass))
+    return subclasses
+
+def create(Euclydia,colorlist):
     print("Wlecome to the shape nursery!")
     print("------------------------------------------------------------")
     print("""   First, where would you like your shape to be placed?""")
@@ -39,7 +54,7 @@ def create(colorlist):
     print("""Your shape is finished!""")
     return Euclydia
 
-def load(colorlist):
+def load(Euclydia,colorlist):
     with open("Resources/"+input("Enter a filename: ")) as f:
         loader = csv.reader(f)
         poplist = list(loader)
@@ -78,6 +93,7 @@ def delete(Euclydia):
         key = input("Select a shape: ")
     Euclydia[key].delete()
     del Euclydia[key]
+    print("Why did you do it?")
     return Euclydia
 
 def locate(Euclydia):
@@ -88,3 +104,42 @@ def locate(Euclydia):
     while key not in list(Euclydia.keys()):
         key = input("Select a shape: ")
     print(key, "is located at", Euclydia[key].turtle.pos())
+
+
+
+def main():
+    Euclydia = {}
+    colorlist = get_all_subclasses(Color)
+    while True:
+        print("""Welcome to Euclydia!
+              ------------------------
+              1. Create a shape
+              2. Delete a shape
+              3. Locate a shape
+              4. Import a population
+              5. Export a population
+              6. Drive a shape
+              7. Quit
+              """)
+        selection = input("Select an option: ")
+
+        if selection == 1:
+            create(Euclydia,colorlist)
+        elif selection == 2:
+            delete(Euclydia)
+        elif selection == 3:
+            locate(Euclydia)
+        elif selection == 4:
+            load(Euclydia)
+        elif selection == 5:
+            save(Euclydia)
+        elif selection == 6:
+            pass
+            drive(Euclydia)
+        elif selection == 7:
+            print("Goodbye!")
+            wn.bye()
+            break
+        else:
+            print("Invalid option.")
+
