@@ -88,6 +88,26 @@ class Shape(turtle):
         self.turtle.register_shape(self.id_num,self.outline) 
         self.turtle.shape(self.id_num)
 
+    def delete(self):
+        """Remove the shape from the screen and from the registry."""
+        # Hide and clear the turtle
+        self.hideturtle()
+        self.clear()
+
+        # Remove from the registry if stored there
+        if hasattr(self.__class__, "registry"):
+            to_delete = None
+            for key, value in self.__class__.registry.items():
+                if value is self:
+                    to_delete = key
+                    break
+            if to_delete:
+                del self.__class__.registry[to_delete]
+
+        # Optionally, remove from screen updates
+        self._destroy()  # Private call to ensure the turtle object is invalidated
+
+
     def voice_setup(self):
         pass
 
