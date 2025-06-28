@@ -1,5 +1,6 @@
 import turtle
 import math
+import random
 from abc import ABC
 class Color(ABC):
     def __init__(self,colorlist):
@@ -64,7 +65,7 @@ class SkyBlue(Color):
 
 class Shape(turtle):
     id_num = 0
-    def __init__(self,X,Y,heading,sides,length,gender,line_file):
+    def __init__(self,X,Y,heading,sides,length,gender,line_file,bounds):
         self.X = X
         self.Y = Y
         self.heading = heading
@@ -72,6 +73,7 @@ class Shape(turtle):
         self.length = length
         self.gender = gender
         self.outline = self.calcpoints()
+        self.bounds = bounds
         self.id_num = Shape.id_num
         self.turtle_setup(self)
         Shape.id_num += 1
@@ -142,7 +144,12 @@ class Shape(turtle):
          return outline
 
     def pathfinding(self):
-        pass
+        if random.random() < 0.6:
+            self.t.forward(random.uniform(2, 6))
+        x, y = self.t.pos()
+        width, height = self.bounds
+        if abs(x) > width / 2 or abs(y) > height / 2:
+            self.t.setheading(self.t.heading() + 180)
 
     def collision(self):
         pass
