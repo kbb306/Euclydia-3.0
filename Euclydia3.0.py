@@ -20,7 +20,7 @@ def create():
                        
                                 Selection: """))
         
-    line_file = input("""   Any special phrases you'd like to define (in a text file in 'Resources?')""")
+    line_file = input("""   Any special phrases you'd like to define (in a text file in 'Resources')?""")
     if line_file == "":
         line_file = "Resources/phrases.csv"
     else:
