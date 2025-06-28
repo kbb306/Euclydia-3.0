@@ -76,6 +76,7 @@ class Shape(turtle):
         self.bounds = bounds
         self.id_num = Shape.id_num
         self.turtle_setup(self)
+        self.start_life()
         Shape.id_num += 1
 
     def turtle_setup(self,id_num):
