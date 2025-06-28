@@ -144,6 +144,8 @@ class Shape(turtle):
          return outline
 
     def pathfinding(self):
+        if random.random() < 0.3:
+            self.turtle.left(random.uniform(-30, 30))  # Random heading jitter
         if random.random() < 0.6:
             self.turtle.forward(random.uniform(5, 15))
         x, y = self.turtle.pos()
