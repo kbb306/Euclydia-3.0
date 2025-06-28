@@ -1,3 +1,4 @@
-from Shapsource4 import *
+import turtle
+from .Shapesource4 import *
 screen = turtle.Screen()
 shapes = []
