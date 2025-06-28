@@ -2,9 +2,7 @@ import turtle
 from Shapesource4 import *
 import csv
 screen = turtle.Screen()
-wn = turtle.Screen()
-height = wn.window_height()
-width = wn.window_width()
+wn = screen
 minsize = 6.0
 wn.title("Euclydia")
 with open ("Euclydia/phrases.csv", 'r') as file:
