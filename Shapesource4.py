@@ -64,13 +64,13 @@ class SkyBlue(Color):
 
 class Shape(turtle):
     id_num = 0
-    def __init__(self,X,Y,heading,sides,length,voice,line_file):
+    def __init__(self,X,Y,heading,sides,length,gender,line_file):
         self.X = X
         self.Y = Y
         self.heading = heading
         self.sides = sides
         self.length = length
-        self.voice = voice
+        self.gender = gender
         self.outline = self.calcpoints()
         self.id_num = Shape.id_num
         self.turtle_setup(self)
@@ -82,6 +82,9 @@ class Shape(turtle):
         self.turtle.heading(self.heading)
         self.turtle.register_shape(self.id_num,self.outline) 
         self.turtle.shape(self.id_num)
+
+    def voice_setup(self):
+        pass
 
     def get_center(self):
        self.center = (self.centerX, self.centerY)
