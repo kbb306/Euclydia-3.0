@@ -141,5 +141,9 @@ class Shape(turtle):
              i+=1
          return outline
 
+    def pathfinding(self):
+        pass
 
+    def collision(self):
+        pass
 
