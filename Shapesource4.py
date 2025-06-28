@@ -65,7 +65,7 @@ class SkyBlue(Color):
 
 class Shape(turtle):
     id_num = 0
-    def __init__(self,X,Y,heading,sides,length,gender,line_file,bounds):
+    def __init__(self,X,Y,heading,sides,length,gender,line_file,bounds): #pass bounds from Euclydia
         self.X = X
         self.Y = Y
         self.heading = heading
@@ -143,16 +143,34 @@ class Shape(turtle):
              i+=1
          return outline
 
-    def pathfinding(self):
+    def pathfinding(self,others):
         if random.random() < 0.3:
             self.turtle.left(random.uniform(-30, 30))  # Random heading jitter
         if random.random() < 0.6:
             self.turtle.forward(random.uniform(5, 15))
+        self.check_collisions(others)
+
         x, y = self.turtle.pos()
         width, height = self.bounds
         if abs(x) > width / 2 or abs(y) > height / 2:
             self.turtle.setheading(self.t.heading() + 180)
 
-    def collision(self):
-        pass
+    def start_life(self):
+        def tick():
+            self.move()
+            self.screen.ontimer(tick, 100 + int(random.random() * 200))
+        tick()
+
+    def check_collisions(self, others, min_dist=20):
+        x1, y1 = self.t.pos()
+        for other in others:
+            if other is self:
+                continue
+        x2, y2 = other.t.pos()
+        distance = ((x1 - x2)**2 + (y1 - y2)**2)**0.5
+        if distance < min_dist:
+                self.turtle.left(180)
+                self.turtle.forward(10)
+
+
 
