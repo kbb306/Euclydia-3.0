@@ -141,3 +141,5 @@ def main():
         else:
             print("Invalid option.")
 
+def drive(Euclydia):
+    pass
