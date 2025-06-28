@@ -72,16 +72,16 @@ class Shape(turtle):
         self.length = length
         self.voice = voice
         self.outline = self.calcpoints()
-        self.turtle_setup(Shape.id_num)
         self.id_num = Shape.id_num
+        self.turtle_setup(self)
         Shape.id_num += 1
 
     def turtle_setup(self,id_num):
         self.turtle = turtle.Turtle()
         self.turtle.color(str(self.set_color()))
         self.turtle.heading(self.heading)
-        self.turtle.register_shape(id_num,self.outline) 
-        self.turtle.shape(id_num)
+        self.turtle.register_shape(self.id_num,self.outline) 
+        self.turtle.shape(self.id_num)
 
     def get_center(self):
        self.center = (self.centerX, self.centerY)
