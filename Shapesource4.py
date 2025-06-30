@@ -171,7 +171,7 @@ class Shape(turtle.Turtle):
              i+=1
          return outline
 
-    def pathfinding(self):
+    def move(self):
         if random.random() < 0.3:
             self.left(random.uniform(-30, 30))  # Random heading jitter
         if random.random() < 0.6:
@@ -187,6 +187,8 @@ class Shape(turtle.Turtle):
         def tick():
             self.move()
             self.screen.ontimer(tick, 100 + int(random.random() * 200))
+            if random.randint(0,100) == 5:
+                self.say()
         tick()
 
     def collisions(self,min_dist=20):
@@ -218,11 +220,11 @@ class Shape(turtle.Turtle):
             "EU":6
 
         }
-        def play_audio(voice):
+        def play_audio(voice,phrase):
             waveform = ggwave.encode(phrase, voice[self.voice], volume=20)
             sa.WaveObject(waveform, 1, 2, 48000).play()
 
-        threading.Thread(target=play_audio, daemon=True).start()
+        threading.Thread(target=play_audio(voice,phrase), daemon=True).start()
  
 
     def drive(self):
