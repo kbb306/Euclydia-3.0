@@ -211,7 +211,6 @@ class Shape(turtle.Turtle):
 
     def say(self):
         phrase = random.choice(self.read())
-        print(phrase)
         voice = {
             "FC":1,
             "FA":2,
@@ -226,7 +225,7 @@ class Shape(turtle.Turtle):
             sa.WaveObject(waveform, 1, 2, 48000).play()
 
             threading.Thread(
-            target=play_audio,
+            target=play_audio(voice,phrase),
             args=(voice[self.voice], phrase),
             daemon=True
             ).start()
