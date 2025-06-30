@@ -69,13 +69,13 @@ class SkyBlue(Color):
 class Shape(turtle.Turtle):
     id_num = 0
     registry = {}  # shared across all Shape instances
-    def __init__(self,X,Y,heading,sides,length,gender,line_file,screen): #pass screen from Euclydia
+    def __init__(self,X,Y,heading,sides,length,voice,line_file,screen): #pass screen from Euclydia
         self.X = X
         self.Y = Y
         self.heading = heading
         self.sides = sides
         self.length = length
-        self.gender = gender
+        self.voice = voice
         self.outline = self.calcpoints()
         self.bounds = self.screen.window_width, self.screen.window_height
         self.screen = screen
@@ -159,7 +159,7 @@ class Shape(turtle.Turtle):
          self.heading = int(heading)
 
     def get_heading(self):
-         return self.heading
+         return self.heading()
              
     def calcpoints(self):
          angle = math.radians(360/self.sides)
@@ -181,7 +181,7 @@ class Shape(turtle.Turtle):
         x, y = self.pos()
         width, height = self.bounds
         if abs(x) > width / 2 or abs(y) > height / 2:
-            self.setheading(self.t.heading() + 180)
+            self.setheading(self.heading() + 180)
 
     def start_life(self):
         def tick():
@@ -219,7 +219,7 @@ class Shape(turtle.Turtle):
 
         }
         def play_audio(voice):
-            waveform = ggwave.encode(phrase, voice[self.gender], volume=20)
+            waveform = ggwave.encode(phrase, voice[self.voice], volume=20)
             sa.WaveObject(waveform, 1, 2, 48000).play()
 
         threading.Thread(target=play_audio, daemon=True).start()
