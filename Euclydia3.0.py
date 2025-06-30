@@ -65,7 +65,7 @@ def save(Euclydia):
     rows = []
     for each in Euclydia.values():
         color_name = each.color.__name__ if hasattr(each.color, "__name__") else "Unknown"
-        new = [each.name, each.sides, each.length, each.centerX, each.centerY, color_name, each.heading, each.gender]
+        new = [each.name, each.sides, each.length, each.centerX, each.centerY, color_name, each.heading, each.gender, each.line_file]
         rows.append(new)
     
     # Temporarily stop the turtle window to avoid conflicts

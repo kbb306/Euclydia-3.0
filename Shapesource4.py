@@ -3,6 +3,8 @@ import math
 import random
 from abc import ABC
 import ggwave
+import simpleaudio as sa
+import threading
 class Color(ABC):
     def __init__(self,colorlist):
           self.color = type(self)
@@ -196,8 +198,17 @@ class Shape(turtle.Turtle):
                 self.left(180)
                 self.forward(10)
 
-    def sound():
-        pass
+    def read(self):
+        f = open()
+
+    def say(self):
+        phrase = random
+        def play_audio():
+            waveform = ggwave.encode(self.phrase, protocolId=self.protocol, volume=self.volume)
+            sa.WaveObject(waveform, 1, 2, 48000).play()
+
+        threading.Thread(target=play_audio, daemon=True).start()
+ 
 
 
 
