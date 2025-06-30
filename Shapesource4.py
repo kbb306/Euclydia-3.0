@@ -87,11 +87,13 @@ class Shape(turtle.Turtle):
         self.start_life()
         Shape.id_num += 1
 
-    def turtle_setup(self,colorlist):
-
-        self.color(str(self.set_color(colorlist)))
-        self.screen.register_shape(self.id_num,self.outline) 
+    def turtle_setup(self, colorlist):
+        chosen_color = self.set_color(colorlist)
+        self.color(chosen_color)
+        self.heading(self.heading)
+        self.screen.register_shape(self.id_num, self.outline)
         self.shape(self.id_num)
+
 
     def delete(self):
         """Remove the shape from the screen and from the registry."""
@@ -139,18 +141,14 @@ class Shape(turtle.Turtle):
          area = (self.sides*self.length*apothem)/2
          return area
     
-    def set_color(self, colorlist, color="Black"):
-        # Create a list of valid color names
-        colorlist_str = [cls.__name__ for cls in colorlist]
-        # Loop until a valid color is chosen
-        while color not in colorlist_str:
-            print(f"Invalid color. Available options: {', '.join(colorlist_str)}")
+    def set_color(self, colorlist, color="black"):
+        valid_names = [cls.__name__.lower() for cls in colorlist]
+        while color.lower() not in valid_names:
+            print(f"Invalid color. Available options: {', '.join(valid_names)}")
             color = input("Select a color: ")
-        # Find the corresponding class and create a new instance
-        colorclass = [cls for cls in colorlist if cls.__name__ == color][0]
-        self.color = colorclass
-        #print(f"Color set to {color}.")
-        return self.color.__name__
+        self.color_name = color.lower()
+        return self.color_name
+
     
     def sayname(self):
          return self.id_num
