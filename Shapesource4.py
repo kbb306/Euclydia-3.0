@@ -90,7 +90,6 @@ class Shape(turtle.Turtle):
     def turtle_setup(self, colorlist):
         chosen_color = self.set_color(colorlist)
         self.color(chosen_color)
-        self.heading(self.heading)
         self.screen.register_shape(self.id_num, self.outline)
         self.shape(self.id_num)
 
