@@ -75,9 +75,9 @@ class Shape(turtle.Turtle):
         self.X = X
         self.Y = Y
         self.name = name
-        self.set_heading(heading)
         self.sides = sides
         self.length = length
+        self.angle = self.heading()
         self.voice = voice
         self.outline = self.calcpoints()
         self.screen = screen
@@ -92,6 +92,7 @@ class Shape(turtle.Turtle):
     def turtle_setup(self,minsize,color,colorlist):
         self.screen.register_shape(str(self.id_num), tuple(self.outline))
         self.shape(str(self.id_num))
+        self.setheading(self.angle)
         self.color(self.set_color(color,colorlist))
         scale = max(math.sqrt(self.get_area()) / 10, minsize)
         self.shapesize(scale)
@@ -156,11 +157,6 @@ class Shape(turtle.Turtle):
     def sayname(self):
          return self.id_num
     
-    def set_heading(self,heading):
-         self.heading = int(heading)
-
-    def get_heading(self):
-         return self.heading()
              
     def calcpoints(self):
          angle = math.radians(360/self.sides)

@@ -74,7 +74,7 @@ class Shape(turtle.Turtle):
         super().__init__()
         self.X = X
         self.Y = Y
-        self.set_heading(heading)
+        self.angle = self.heading()
         self.sides = sides
         self.length = length
         self.voice = voice
@@ -154,13 +154,7 @@ class Shape(turtle.Turtle):
     
     def sayname(self):
          return self.id_num
-    
-    def set_heading(self,heading):
-         self.heading = int(heading)
 
-    def get_heading(self):
-         return self.heading()
-             
     def calcpoints(self):
          angle = math.radians(360/self.sides)
          outline = []
