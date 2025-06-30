@@ -70,7 +70,7 @@ class Shape(turtle.Turtle):
     id_num = 0
     registry = {}  # shared across all Shape instances
     minsize = 6.0
-    def __init__(self,X,Y,heading,sides,length,voice,line_file,screen,colorlist): #pass screen from Euclydia
+    def __init__(self,X,Y,heading,sides,length,voice,line_file,screen,minsize): #pass screen from Euclydia
         super().__init__()
         self.X = X
         self.Y = Y
@@ -84,17 +84,14 @@ class Shape(turtle.Turtle):
         self.lines = line_file
         self.id_num = Shape.id_num
         Shape.registry.update({self.id_num:self})
-        self.turtle_setup(colorlist)
+        self.turtle_setup(minsize)
         self.start_life()
         Shape.id_num += 1
 
-    def turtle_setup(self, colorlist):
-        
-        chosen_color = self.set_color(self.color,colorlist)
-        self.color(chosen_color)
+    def turtle_setup(self,minsize):
         self.screen.register_shape(str(self.id_num), tuple(self.outline))
         self.shape(str(self.id_num))
-        scale = max(math.sqrt(each.get_area()) / 10, minsize)
+        scale = max(math.sqrt(self.get_area()) / 10, minsize)
         self.shapesize(scale)
         self.penup
 

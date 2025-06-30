@@ -50,7 +50,7 @@ def create(Euclydia,colorlist):
         line_file = "".join(["Resources","/", line_file])
 
     name = input("""    Time to name your shape: """)
-    newshape = Shape(X,Y,heading,sides,length,voice,line_file,screen,colorlist)
+    newshape = Shape(X,Y,heading,sides,length,voice,line_file,screen)
     newshape.set_color(color,colorlist)
     print("Rockabye",name+",","please don't you cry....")
     Euclydia.update({name:newshape})
