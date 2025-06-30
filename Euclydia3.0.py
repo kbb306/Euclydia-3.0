@@ -5,10 +5,6 @@ screen = turtle.Screen()
 wn = screen
 minsize = 6.0
 wn.title("Euclydia")
-with open ("Euclydia/phrases.csv", 'r') as file:
-        soundchip = csv.reader(file)
-        talksay = list(soundchip)
-
 def get_all_subclasses(cls):
     subclasses = []
     for subclass in cls.__subclasses__():
