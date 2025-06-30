@@ -61,7 +61,7 @@ def load(Euclydia,screen,colorlist):
         loader = csv.reader(f)
         poplist = list(loader)
         for each in poplist:
-            newshape = Shape(each[0],int(each[1]),int(each[2]),int(each[3]),int(each[4]),each[5],float(each[6]),each[7],each[8],screen,colorlist)
+            newshape = Shape(each[0],float(each[1]),float(each[2]),float(each[3]),float(each[4]),each[5],float(each[6]),each[7],each[8],screen,colorlist)
             Euclydia.update({each[0]:newshape})
 
 def save(Euclydia):
