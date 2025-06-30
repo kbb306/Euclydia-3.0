@@ -51,7 +51,7 @@ def create(Euclydia,colorlist):
 
     name = input("""    Time to name your shape: """)
     newshape = Shape(X,Y,heading,sides,length,voice,line_file,screen,colorlist)
-    newshape.set_color(color)
+    newshape.set_color(color,colorlist)
     print("Rockabye",name+",","please don't you cry....")
     Euclydia.update({name:newshape})
     print("""Your shape is finished!""")

@@ -88,7 +88,8 @@ class Shape(turtle.Turtle):
         Shape.id_num += 1
 
     def turtle_setup(self, colorlist):
-        chosen_color = self.set_color(colorlist)
+        color = "Black"
+        chosen_color = self.set_color(color,colorlist)
         self.color(chosen_color)
         self.screen.register_shape(str(self.id_num), tuple(self.outline))
         self.shape(str(self.id_num))
@@ -140,13 +141,13 @@ class Shape(turtle.Turtle):
          area = (self.sides*self.length*apothem)/2
          return area
     
-    def set_color(self, colorlist, color="black"):
+    def set_color(self, color, colorlist):
         valid_names = [cls.__name__.lower() for cls in colorlist]
-        while color.lower() not in valid_names:
-            print(f"Invalid color. Available options: {', '.join(valid_names)}")
-            color = input("Select a color: ")
+        if color.lower() not in valid_names:
+            raise ValueError(f"Invalid color '{color}'")
         self.color_name = color.lower()
         return self.color_name
+
 
     
     def sayname(self):
