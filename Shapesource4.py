@@ -70,6 +70,7 @@ class Shape(turtle.Turtle):
     id_num = 0
     registry = {}  # shared across all Shape instances
     def __init__(self,X,Y,heading,sides,length,voice,line_file,screen,colorlist): #pass screen from Euclydia
+        super().__init__()
         self.X = X
         self.Y = Y
         self.set_heading(heading)
