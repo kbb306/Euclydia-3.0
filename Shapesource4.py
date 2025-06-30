@@ -69,7 +69,7 @@ class SkyBlue(Color):
 class Shape(turtle.Turtle):
     id_num = 0
     registry = {}  # shared across all Shape instances
-    def __init__(self,X,Y,heading,sides,length,voice,line_file,screen): #pass screen from Euclydia
+    def __init__(self,X,Y,heading,sides,length,voice,line_file,screen,colorlist): #pass screen from Euclydia
         self.X = X
         self.Y = Y
         self.heading = heading
