@@ -213,35 +213,35 @@ class Shape(turtle.Turtle):
 
 
 
-def read(self):
-    path = os.path.join(os.path.dirname(__file__), self.lines)
-    if not os.path.exists(path):
-        print(f"[ERROR] Could not find phrase file: {path}")
-        return ["...silence..."]
-    with open(path, encoding='utf-8') as f:
-        return [line.strip() for line in f if line.strip()]
+    def read(self):
+        path = os.path.join(os.path.dirname(__file__), self.lines)
+        if not os.path.exists(path):
+            print(f"[ERROR] Could not find phrase file: {path}")
+            return ["...silence..."]
+        with open(path, encoding='utf-8') as f:
+            return [line.strip() for line in f if line.strip()]
 
 
-def say(self):
-        phrase = random.choice(self.read())
-        voice = {
-            "FC":1,
-            "FA":2,
-            "MC":7,
-            "MA":8,
-            "SC":0,
-            "EU":6
+    def say(self):
+            phrase = random.choice(self.read())
+            voice_map = {
+                "FC":1,
+                "FA":2,
+                "MC":7,
+                "MA":8,
+                "SC":0,
+                "EU":6
 
-        }
-        def play_audio(voice,phrase):
-            waveform = ggwave.encode(phrase, voice, volume=20)
-            sa.WaveObject(waveform, 1, 2, 48000).play()
+            }
+            def play_audio(voice,phrase):
+                waveform = ggwave.encode(phrase, voice, volume=20)
+                sa.WaveObject(waveform, 1, 2, 48000).play()
 
-        threading.Thread(
-        target=play_audio,
-        args=(voice[self.voice], phrase),
-        daemon=True
-        ).start()
+            threading.Thread(
+            target=play_audio,
+            args=(voice_map[self.voice], phrase),
+            daemon=True
+            ).start()
 
 
 def drive(self):
