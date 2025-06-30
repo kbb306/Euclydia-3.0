@@ -2,6 +2,8 @@ import turtle
 from Shapesource4 import * #Psst. Change to Shapesource0 for a surprise!
 import csv
 screen = turtle.Screen()
+init_speech_window()
+init_speech_window()
 wn = screen
 minsize = 6.0
 wn.title("Euclydia")

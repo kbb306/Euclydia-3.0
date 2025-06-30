@@ -5,6 +5,16 @@ from abc import ABC
 import ggwave
 import simpleaudio as sa
 import threading
+import tkinter as tk
+
+speech_window = None
+def init_speech_window():
+    global speech_window, speech_text
+    speech_window = tk.Toplevel()
+    speech_window.title("Shape Speech Log")
+    speech_text = tk.Text(speech_window, height=20, width=60)
+    speech_text.pack()
+
 class Color(ABC):
     def __init__(self,colorlist):
           self.color = type(self)
@@ -218,7 +228,10 @@ class Shape(turtle.Turtle):
         def play_audio(voice,phrase):
             waveform = ggwave.encode(phrase, voice, volume=20)
             sa.WaveObject(waveform, 1, 2, 48000).play()
-
+            
+        if speech_window and speech_window.winfo_exists():
+            speech_text.insert(tk.END, f"{self.name} says: {phrase}\n")
+            speech_text.see(tk.END)
         threading.Thread(target=play_audio(voice[self.voice],phrase), daemon=True).start()
  
 

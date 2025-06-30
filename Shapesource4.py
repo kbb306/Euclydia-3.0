@@ -7,6 +7,16 @@ import pyaudio
 import threading
 import os
 import numpy as np
+import tkinter as tk
+
+speech_window = None
+def init_speech_window():
+    global speech_window, speech_text
+    speech_window = tk.Toplevel()
+    speech_window.title("Shape Speech Log")
+    speech_text = tk.Text(speech_window, height=20, width=60)
+    speech_text.pack()
+
 
 class Speech:
     def __init__(self,phrase,voice):
@@ -264,7 +274,10 @@ class Shape(turtle.Turtle):
 
         voice_id = voice_map.get(self.voice, 8)  # Default to 'MA' if unknown
         speech = Speech(phrase,voice_id)
-        #print(self.name,"says:",phrase)
+        if speech_window and speech_window.winfo_exists():
+            speech_text.insert(tk.END, f"{self.name} says: {phrase}\n")
+            speech_text.see(tk.END)
+
         threading.Thread(target=speech.playback, daemon=True).start()
 
         
