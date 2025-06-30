@@ -205,7 +205,7 @@ class Shape(turtle.Turtle):
         return script
 
     def say(self):
-        phrase = random.choice(self.read())
+        phrase = random.choice(["WHY DID YOU DO IT?"])
         voice = {
             "FC":1,
             "FA":2,
