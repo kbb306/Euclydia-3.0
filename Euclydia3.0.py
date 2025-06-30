@@ -139,7 +139,6 @@ def main():
         elif selection == 5:
             save(Euclydia)
         elif selection == 6:
-            pass
             drive(Euclydia)
         elif selection == 7:
             print("Goodbye!")
