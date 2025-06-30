@@ -251,7 +251,7 @@ class Shape(turtle.Turtle):
                     raise ValueError("Phrase file is empty.")
                 return lines
         except Exception as e:
-            print(f"[ERROR] Could not find phrase file: {self.lines}")
+            #print(f"[ERROR] Could not find phrase file: {self.lines}")
             return ["WHY DID YOU DO IT?"]
 
 
