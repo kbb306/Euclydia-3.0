@@ -91,6 +91,7 @@ class Shape(turtle.Turtle):
     def turtle_setup(self,minsize,color,colorlist):
         self.screen.register_shape(str(self.id_num), tuple(self.outline))
         self.shape(str(self.id_num))
+        self.setheading(self.angle)
         self.set_color(color,colorlist)
         scale = max(math.sqrt(self.get_area()) / 10, minsize)
         self.shapesize(scale)
