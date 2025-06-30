@@ -89,8 +89,8 @@ class Shape(turtle.Turtle):
         Shape.id_num += 1
 
     def turtle_setup(self, colorlist):
-        color = "Black"
-        chosen_color = self.set_color(color,colorlist)
+        
+        chosen_color = self.set_color(self.color,colorlist)
         self.color(chosen_color)
         self.screen.register_shape(str(self.id_num), tuple(self.outline))
         self.shape(str(self.id_num))
