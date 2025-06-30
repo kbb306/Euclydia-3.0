@@ -90,7 +90,7 @@ class Shape(turtle.Turtle):
     def turtle_setup(self, colorlist):
         chosen_color = self.set_color(colorlist)
         self.color(chosen_color)
-        self.screen.register_shape(str(self.id_num), ("polygon", self.outline))
+        self.screen.register_shape(str(self.id_num), tuple(self.outline))
         self.shape(str(self.id_num))
 
 
@@ -173,7 +173,7 @@ class Shape(turtle.Turtle):
             self.left(random.uniform(-30, 30))  # Random heading jitter
         if random.random() < 0.6:
             self.forward(random.uniform(5, 15))
-        self.check_collisions()
+        self.collisions()
 
         x, y = self.pos()
         width, height = self.bounds
