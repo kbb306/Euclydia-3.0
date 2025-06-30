@@ -190,7 +190,7 @@ class Shape(turtle.Turtle):
 
     def collisions(self,min_dist=20):
         x1, y1 = self.pos()
-        for other in Shape.registry.items():
+        for key, other in Shape.registry.items():
             if other is self:
                 continue
         x2, y2 = other.pos()
