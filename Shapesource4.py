@@ -192,10 +192,13 @@ class Shape(turtle.Turtle):
 
     def start_life(self):
         def tick():
-            self.move()
-            self.screen.ontimer(tick, 500 + int(random.random() * 500))
-            if random.randint(0,100) == 5:
-                self.say()
+            try:
+                self.move()
+                self.screen.ontimer(tick, 500 + int(random.random() * 500))
+                if random.randint(0, 500) == 5:
+                    self.say()
+            except turtle.Terminator:
+                print(f"[Turtle Error] Shape {self.name} was terminated.")
         tick()
 
     def collisions(self, min_dist=20):

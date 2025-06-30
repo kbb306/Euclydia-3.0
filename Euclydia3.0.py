@@ -61,6 +61,9 @@ def load(Euclydia,screen,colorlist):
         loader = csv.reader(f)
         poplist = list(loader)
         for each in poplist:
+            if not each[8].startswith("Resources/"):
+                each[8] = "Resources/" + each[8]
+
             newshape = Shape(each[0],float(each[1]),float(each[2]),float(each[3]),float(each[4]),each[5],float(each[6]),each[7],each[8],screen,colorlist)
             Euclydia.update({each[0]:newshape})
 
