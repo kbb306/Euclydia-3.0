@@ -222,7 +222,7 @@ def read(self):
         return [line.strip() for line in f if line.strip()]
 
 
-    def say(self):
+def say(self):
         phrase = random.choice(self.read())
         voice = {
             "FC":1,
@@ -244,6 +244,6 @@ def read(self):
         ).start()
 
 
-    def drive(self):
+def drive(self):
         pass
 
