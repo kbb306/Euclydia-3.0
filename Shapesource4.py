@@ -85,7 +85,7 @@ class Shape(turtle.Turtle):
 
         self.color(str(self.set_color()))
         self.heading(self.heading)
-        self.register_shape(self.id_num,self.outline) 
+        self.screen.register_shape(self.id_num,self.outline) 
         self.shape(self.id_num)
 
     def delete(self):
