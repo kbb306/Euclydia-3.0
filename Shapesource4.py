@@ -2,6 +2,7 @@ import turtle
 import math
 import random
 from abc import ABC
+import ggwave
 class Color(ABC):
     def __init__(self,colorlist):
           self.color = type(self)
@@ -194,6 +195,9 @@ class Shape(turtle.Turtle):
         if distance < min_dist:
                 self.left(180)
                 self.forward(10)
+
+    def sound():
+        pass
 
 
 
