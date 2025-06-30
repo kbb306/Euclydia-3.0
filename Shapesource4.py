@@ -79,7 +79,7 @@ class Shape(turtle.Turtle):
         self.outline = self.calcpoints()
         self.screen = screen
         self.bounds = self.screen.window_width(), self.screen.window_height()
-        self.lines = self.read(line_file)
+        self.lines = line_file
         self.id_num = Shape.id_num
         Shape.registry.update({self.id_num:self})
         self.turtle_setup(self,colorlist)
