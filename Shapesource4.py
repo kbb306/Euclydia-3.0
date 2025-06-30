@@ -91,7 +91,7 @@ class Shape(turtle.Turtle):
     def turtle_setup(self,minsize,color,colorlist):
         self.screen.register_shape(str(self.id_num), tuple(self.outline))
         self.shape(str(self.id_num))
-        self.set_color(color,colorlist)
+        self.color(self.set_color(color,colorlist))
         scale = max(math.sqrt(self.get_area()) / 10, minsize)
         self.shapesize(scale)
         self.penup()
@@ -186,7 +186,7 @@ class Shape(turtle.Turtle):
     def start_life(self):
         def tick():
             self.move()
-            self.screen.ontimer(tick, 100 + int(random.random() * 200))
+            self.screen.ontimer(tick, 500 + int(random.random() * 500))
             if random.randint(0,100) == 5:
                 self.say()
         tick()
@@ -211,6 +211,7 @@ class Shape(turtle.Turtle):
 
     def say(self):
         phrase = random.choice(self.read())
+        print(phrase)
         voice = {
             "FC":1,
             "FA":2,
@@ -224,8 +225,12 @@ class Shape(turtle.Turtle):
             waveform = ggwave.encode(phrase, voice, volume=20)
             sa.WaveObject(waveform, 1, 2, 48000).play()
 
-        threading.Thread(target=play_audio(voice[self.voice],phrase), daemon=True).start()
- 
+            threading.Thread(
+            target=play_audio,
+            args=(voice[self.voice], phrase),
+            daemon=True
+            ).start()
+
 
     def drive(self):
         pass
