@@ -13,7 +13,7 @@ def get_all_subclasses(cls):
     return subclasses
 
 def create(Euclydia,screen,colorlist):
-    print("Wlecome to the shape nursery!")
+    print("Welcome to the shape nursery!")
     print("------------------------------------------------------------")
     print("""   First, where would you like your shape to be placed?""")
     X = int(input("     Enter an X coordinate: "))
