@@ -171,17 +171,26 @@ class Shape(turtle.Turtle):
              i+=1
          return outline
 
+    
+
     def move(self):
-        if random.random() < 0.3:
-            self.left(random.uniform(-30, 30))  # Random heading jitter
-        if random.random() < 0.6:
-            self.forward(random.uniform(5, 15))
+        # Slight random turn every so often (5% chance)
+        if random.random() < 0.05:
+            self.setheading(self.heading() + random.uniform(-10, 10))
+
+        # Constant slow forward motion
+        self.forward(3)
+
+        # Handle collision with other shapes
         self.collisions()
 
+        # Bounce off screen edges gently
         x, y = self.pos()
         width, height = self.bounds
         if abs(x) > width / 2 or abs(y) > height / 2:
-            self.setheading(self.heading() + 180)
+            self.setheading((self.heading() + 180) % 360)
+            self.forward(5)
+
 
     def start_life(self):
         def tick():
@@ -191,16 +200,19 @@ class Shape(turtle.Turtle):
                 self.say()
         tick()
 
-    def collisions(self,min_dist=20):
+    def collisions(self, min_dist=20):
         x1, y1 = self.pos()
         for key, other in Shape.registry.items():
             if other is self:
                 continue
-        x2, y2 = other.pos()
-        distance = ((x1 - x2)**2 + (y1 - y2)**2)**0.5
-        if distance < min_dist:
-                self.left(180)
-                self.forward(10)
+            x2, y2 = other.pos()
+            distance = ((x1 - x2)**2 + (y1 - y2)**2)**0.5
+            if distance < min_dist:
+                # Bounce away from other shape
+                angle = self.towards(x2, y2)
+                self.setheading((angle + 180) % 360)
+                self.forward(5)
+
 
     def read(self):
         f = open(self.lines)
