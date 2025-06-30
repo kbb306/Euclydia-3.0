@@ -34,14 +34,16 @@ def create(Euclydia,colorlist):
     while age not in ["A","C"]:
         age = str(input("""     Is your shape a(n)?
                                     A. Adult
-                                    C. Child"""))
+                                    C. Child
+                                Input: """))
     voice = "".join([gender.upper(),age.upper()])
         
     color = input("Select a Color (see Shapesource4.py for a list): ")
 
 
         
-    line_file = input("""   Any special phrases you'd like to define (in a text file in 'Resources')?""")
+    line_file = input("""   Any special phrases you'd like to define (in a text file in 'Resources')?
+                      Input File Name (Blank for default): """)
     if line_file == "":
         line_file = "Resources/phrases.txt"
     else:
