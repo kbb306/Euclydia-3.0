@@ -86,7 +86,7 @@ class Shape(turtle.Turtle):
         self.Y = Y
         self.name = name
         self.angle = heading
-        self.sides = sides
+        self.sides = float(sides)
         self.length = length
         self.voice = voice
         self.outline = self.calcpoints()
