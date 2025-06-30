@@ -12,7 +12,7 @@ def get_all_subclasses(cls):
         subclasses.extend(get_all_subclasses(subclass))
     return subclasses
 
-def create(Euclydia,colorlist):
+def create(Euclydia,screen,colorlist):
     print("Wlecome to the shape nursery!")
     print("------------------------------------------------------------")
     print("""   First, where would you like your shape to be placed?""")
@@ -50,20 +50,18 @@ def create(Euclydia,colorlist):
         line_file = "".join(["Resources","/", line_file])
 
     name = input("""    Time to name your shape: """)
-    newshape = Shape(X,Y,heading,sides,length,voice,line_file,screen)
-    newshape.set_color(color,colorlist)
+    newshape = Shape(sides,length,X,Y,color,heading,voice,line_file,screen,colorlist,minsize)
     print("Rockabye",name+",","please don't you cry....")
     Euclydia.update({name:newshape})
     print("""Your shape is finished!""")
     return Euclydia
 
-def load(Euclydia,colorlist):
+def load(Euclydia,screen,colorlist):
     with open("Resources/"+input("Enter a filename: ")) as f:
         loader = csv.reader(f)
         poplist = list(loader)
         for each in poplist:
-            newshape = Shape(each[3],each[4],each[6],each[1],each[2],each[7],each[8])
-            newshape.set_color(colorlist,each[5])
+            newshape = Shape(each[1],each[2],each[3],each[4],each[5],each[6],each[7],each[8],screen,colorlist)
             Euclydia.update({each[0]:newshape})
 
 def save(Euclydia):
@@ -127,13 +125,13 @@ def main():
         selection = int(input("Select an option: "))
 
         if selection == 1:
-            create(Euclydia,colorlist)
+            create(Euclydia,screen,colorlist)
         elif selection == 2:
             delete(Euclydia)
         elif selection == 3:
             locate(Euclydia)
         elif selection == 4:
-            load(Euclydia)
+            load(Euclydia,screen,colorlist)
         elif selection == 5:
             save(Euclydia)
         elif selection == 6:
