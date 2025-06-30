@@ -69,6 +69,7 @@ class SkyBlue(Color):
 class Shape(turtle.Turtle):
     id_num = 0
     registry = {}  # shared across all Shape instances
+    minsize = 6.0
     def __init__(self,X,Y,heading,sides,length,voice,line_file,screen,colorlist): #pass screen from Euclydia
         super().__init__()
         self.X = X
@@ -93,6 +94,8 @@ class Shape(turtle.Turtle):
         self.color(chosen_color)
         self.screen.register_shape(str(self.id_num), tuple(self.outline))
         self.shape(str(self.id_num))
+        scale = max(math.sqrt(each.get_area()) / 10, minsize)
+        self.shapesize(scale)
 
 
     def delete(self):
