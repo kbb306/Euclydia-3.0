@@ -220,10 +220,10 @@ class Shape(turtle.Turtle):
 
         }
         def play_audio(voice,phrase):
-            waveform = ggwave.encode(phrase, voice[self.voice], volume=20)
+            waveform = ggwave.encode(phrase, voice, volume=20)
             sa.WaveObject(waveform, 1, 2, 48000).play()
 
-        threading.Thread(target=play_audio(voice,phrase), daemon=True).start()
+        threading.Thread(target=play_audio(voice[self.voice],phrase), daemon=True).start()
  
 
     def drive(self):
