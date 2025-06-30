@@ -79,11 +79,13 @@ class Shape(turtle.Turtle):
         self.outline = self.calcpoints()
         self.bounds = self.screen.window_width, self.screen.window_height
         self.screen = screen
+        self.lines = self.read(line_file)
         self.id_num = Shape.id_num
         Shape.registry.update({self.id_num:self})
         self.turtle_setup(self)
         self.start_life()
         Shape.id_num += 1
+
     def turtle_setup(self):
 
         self.color(str(self.set_color()))
@@ -199,12 +201,25 @@ class Shape(turtle.Turtle):
                 self.forward(10)
 
     def read(self):
-        f = open()
+        f = open(self.lines)
+        script = []
+        for each in f:
+            script.append(each)
+        return script
 
     def say(self):
-        phrase = random
+        phrase = random.choice(self.lines)
+        protocol = {
+            "FC":1,
+            "FA":2,
+            "MC":7,
+            "MA":8,
+            "SC":0,
+            "EU":6
+
+        }
         def play_audio():
-            waveform = ggwave.encode(self.phrase, protocolId=self.protocol, volume=self.volume)
+            waveform = ggwave.encode(phrase, protocolId=self.protocol, volume=20)
             sa.WaveObject(waveform, 1, 2, 48000).play()
 
         threading.Thread(target=play_audio, daemon=True).start()
