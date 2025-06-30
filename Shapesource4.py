@@ -221,7 +221,7 @@ class Shape(turtle.Turtle):
         path = os.path.join(os.path.dirname(__file__), self.lines)
         if not os.path.exists(path):
             print(f"[ERROR] Could not find phrase file: {path}")
-            return ["...silence..."]
+            return ["WHY DID YOU DO IT?"]
         with open(path, encoding='utf-8') as f:
             return [line.strip() for line in f if line.strip()]
 
