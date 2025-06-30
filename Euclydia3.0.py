@@ -18,7 +18,7 @@ def create(Euclydia,colorlist):
     print("""   First, where would you like your shape to be placed?""")
     X = int(input("     Enter an X coordinate: "))
     Y = int(input("     Enter a Y coordinate: "))
-    heading = int(input("   Which angle should your shape be turned at? (0-360)"))
+    heading = int(input("   Which angle should your shape be turned at (0-360)?: "))
     print("""   Now, we need its looks.""")
     sides = int(input("""       How many sides?: """))
     length = int(input("""      What length (irregular polygons are unsupported)?: """))
