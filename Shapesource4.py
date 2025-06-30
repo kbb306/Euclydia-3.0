@@ -246,7 +246,7 @@ class Shape(turtle.Turtle):
             "EU": 6,
         }
 
-        voice_id = voice_map.get(self.voice, 6)  # Default to 'EU' if unknown
+        voice_id = voice_map.get(self.voice, 8)  # Default to 'MA' if unknown
 
         def play_audio(protocol, phrase):
             try:
