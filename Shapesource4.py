@@ -265,6 +265,6 @@ class Shape(turtle.Turtle):
         voice_id = voice_map.get(self.voice, 8)  # Default to 'MA' if unknown
         speech = Speech(phrase,voice_id)
         print(self.name,"says:",phrase)
-        threading.Thread(target=speech.run, daemon=True).start()
+        threading.Thread(target=speech.playback, daemon=True).start()
 
         
