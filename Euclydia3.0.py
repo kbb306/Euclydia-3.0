@@ -23,7 +23,7 @@ def create(Euclydia,colorlist):
     sides = int(input("""       How many sides?: """))
     length = int(input("""      What length (irregular polygons are unsupported)?: """))
     gender = 0
-    while gender not in [1,2]:
+    while gender not in ["M","F"]:
         gender = str(input("""  Shapes don't have gender like us, but we do need pronouns.
                                     F. She/Her
                                     M. He/Him
@@ -31,7 +31,7 @@ def create(Euclydia,colorlist):
     
                                 Selection: """))
     age = 0
-    while age not in [1,2]:
+    while age not in ["A","C"]:
         age = str(input("""     Is your shape a(n)?
                                     A. Adult
                                     C. Child"""))
@@ -122,7 +122,7 @@ def main():
               6. Drive a shape
               7. Quit
               """)
-        selection = input("Select an option: ")
+        selection = int(input("Select an option: "))
 
         if selection == 1:
             create(Euclydia,colorlist)
