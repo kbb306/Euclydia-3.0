@@ -123,7 +123,7 @@ class Shape(turtle.Turtle):
     
     def set_X(self, X):
          self.centerX = float(X)
-         self.turtle.xcor(self.centerX)
+         self.xcor(self.centerX)
 
     def set_Y(self, Y):
          self.centerY = float(Y)
@@ -168,15 +168,15 @@ class Shape(turtle.Turtle):
 
     def pathfinding(self):
         if random.random() < 0.3:
-            self.turtle.left(random.uniform(-30, 30))  # Random heading jitter
+            self.left(random.uniform(-30, 30))  # Random heading jitter
         if random.random() < 0.6:
-            self.turtle.forward(random.uniform(5, 15))
+            self.forward(random.uniform(5, 15))
         self.check_collisions()
 
-        x, y = self.turtle.pos()
+        x, y = self.pos()
         width, height = self.bounds
         if abs(x) > width / 2 or abs(y) > height / 2:
-            self.turtle.setheading(self.t.heading() + 180)
+            self.setheading(self.t.heading() + 180)
 
     def start_life(self):
         def tick():
@@ -192,8 +192,8 @@ class Shape(turtle.Turtle):
         x2, y2 = other.t.pos()
         distance = ((x1 - x2)**2 + (y1 - y2)**2)**0.5
         if distance < min_dist:
-                self.turtle.left(180)
-                self.turtle.forward(10)
+                self.left(180)
+                self.forward(10)
 
 
 
