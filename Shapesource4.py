@@ -264,10 +264,10 @@ class Shape(turtle.Turtle):
             phrase = "WHY DID YOU DO IT?"
 
         voice_map = {
-            "FC": 1,
-            "FA": 2,
-            "MC": 7,
-            "MA": 8,
+            "FC": 2,
+            "FA": 1,
+            "MC": 8,
+            "MA": 7,
             "SC": 0,
             "EU": 6,
         }
