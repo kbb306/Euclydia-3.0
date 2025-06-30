@@ -36,7 +36,7 @@ def create(Euclydia,colorlist):
                                 Selection: """))
     age = 0
     while age not in [1,2]:
-        age = str(input("""         Is your shape a(n)?
+        age = str(input("""     Is your shape a(n)?
                                     A. Adult
                                     C. Child"""))
     voice = "".join([gender.upper(),age.upper()])
