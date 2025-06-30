@@ -96,6 +96,7 @@ class Shape(turtle.Turtle):
         self.shape(str(self.id_num))
         scale = max(math.sqrt(each.get_area()) / 10, minsize)
         self.shapesize(scale)
+        self.penup
 
 
     def delete(self):
