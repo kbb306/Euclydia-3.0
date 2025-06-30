@@ -225,5 +225,6 @@ class Shape(turtle.Turtle):
         threading.Thread(target=play_audio, daemon=True).start()
  
 
-
+    def drive(self):
+        pass
 

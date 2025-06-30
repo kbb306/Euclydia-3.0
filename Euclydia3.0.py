@@ -102,7 +102,7 @@ def delete(Euclydia):
     return Euclydia
 
 def locate(Euclydia):
-    print("""Current Popoulation:""")
+    print("""Current Population:""")
     for each in list(Euclydia.keys()):
         print(each)
     key = "Why did you do it?"
@@ -149,4 +149,10 @@ def main():
             print("Invalid option.")
 
 def drive(Euclydia):
-    pass
+    print("""Current Population:""")
+    for each in list(Euclydia.keys()):
+        print(each)
+    key = "Why did you do it?"
+    while key not in list(Euclydia.keys()):
+        key = input("Select a shape: ")
+    Euclydia[key].drive()
