@@ -233,8 +233,8 @@ def say(self):
             "EU":6
 
         }
-        def play_audio(voice,phrase):
-            waveform = ggwave.encode(voice, phrase, volume=20)
+        def play_audio(self,voice,phrase):
+            waveform = ggwave.encode(phrase, voice, volume=20)
             sa.WaveObject(waveform, 1, 2, 48000).play()
 
         threading.Thread(
