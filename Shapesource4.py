@@ -77,7 +77,7 @@ class Shape(turtle.Turtle):
         self.length = length
         self.voice = voice
         self.outline = self.calcpoints()
-        self.bounds = self.screen.window_width, self.screen.window_height
+        self.bounds = self.screen.window_width(), self.screen.window_height()
         self.screen = screen
         self.lines = self.read(line_file)
         self.id_num = Shape.id_num
