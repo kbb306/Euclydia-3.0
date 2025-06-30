@@ -28,7 +28,7 @@ def create(Euclydia,colorlist):
     length = int(input("""      What length (irregular polygons are unsupported)?: """))
     gender = 0
     while gender not in [1,2]:
-        gender = str(input("""      Shapes don't have gender like us, but we do need pronouns.
+        gender = str(input("""  Shapes don't have gender like us, but we do need pronouns.
                                     F. She/Her
                                     M. He/Him
                        
