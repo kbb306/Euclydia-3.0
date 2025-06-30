@@ -63,7 +63,7 @@ class SkyBlue(Color):
     def __init__(self, colorlist):
         super().__init__(colorlist)
 
-class Shape(turtle):
+class Shape(turtle.Turtle):
     id_num = 0
     registry = {}  # shared across all Shape instances
     def __init__(self,X,Y,heading,sides,length,gender,line_file,screen): #pass screen from Euclydia
@@ -82,11 +82,11 @@ class Shape(turtle):
         self.start_life()
         Shape.id_num += 1
     def turtle_setup(self):
-        self.turtle = turtle.Turtle()
-        self.turtle.color(str(self.set_color()))
-        self.turtle.heading(self.heading)
-        self.turtle.register_shape(self.id_num,self.outline) 
-        self.turtle.shape(self.id_num)
+
+        self.color(str(self.set_color()))
+        self.heading(self.heading)
+        self.register_shape(self.id_num,self.outline) 
+        self.shape(self.id_num)
 
     def delete(self):
         """Remove the shape from the screen and from the registry."""

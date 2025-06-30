@@ -101,7 +101,7 @@ def locate(Euclydia):
     key = "Why did you do it?"
     while key not in list(Euclydia.keys()):
         key = input("Select a shape: ")
-    print(key, "is located at", Euclydia[key].turtle.pos())
+    print(key, "is located at", Euclydia[key].pos())
 
 
 
