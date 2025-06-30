@@ -7,6 +7,22 @@ import pyaudio
 import threading
 import os
 import numpy as np
+
+class Speech:
+    def __init__(self,phrase,voice):
+        self.phrase = phrase
+        self.voice = voice
+    def playback(self):
+        p = pyaudio.PyAudio()
+        self.waveform = ggwave.encode(self.phrase, self.voice, volume = 20)
+        stream = p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
+        stream.write(self.waveform, len(self.waveform)//4)
+        stream.stop_stream()
+        stream.close()
+
+        p.terminate()
+
+
 class Color(ABC):
     def __init__(self,colorlist):
           self.color = type(self)
@@ -247,48 +263,8 @@ class Shape(turtle.Turtle):
         }
 
         voice_id = voice_map.get(self.voice, 8)  # Default to 'MA' if unknown
+        speech = Speech(phrase,voice_id)
+        print(self.name,"says:",phrase)
+        threading.Thread(target=speech.run, daemon=True).start()
 
-        def play_audio(protocol, phrase):
-            try:
-                waveform = ggwave.encode(phrase, protocolId=protocol, volume=20)
-                if not isinstance(waveform, bytes):
-                    waveform = (waveform * 32767).astype(np.int16).tobytes()
-
-                p = pyaudio.PyAudio()
-                stream = p.open(format=pyaudio.paInt16,
-                                channels=1,
-                                rate=48000,
-                                output=True)
-                stream.write(waveform)
-                stream.stop_stream()
-                stream.close()
-                p.terminate()
-            except Exception as e:
-                print(f"[Audio Error] {e}")
-                try:
-                    fallback = ggwave.encode("WHY DID YOU DO IT?", protocolId=protocol, volume=20)
-                    if not isinstance(fallback, bytes):
-                        fallback = (fallback * 32767).astype(np.int16).tobytes()
-
-                    p = pyaudio.PyAudio()
-                    stream = p.open(format=pyaudio.paInt16,
-                                    channels=1,
-                                    rate=48000,
-                                    output=True)
-                    stream.write(fallback)
-                    stream.stop_stream()
-                    stream.close()
-                    p.terminate()
-                except Exception as fallback_error:
-                    print(f"[Fallback Audio Error] {fallback_error}")
-
-        threading.Thread(
-            target=play_audio,
-            args=(voice_id, phrase),
-            daemon=True
-        ).start()
-
-
-def drive(self):
-        pass
-
+        
