@@ -151,4 +151,5 @@ def drive(Euclydia):
     while key not in list(Euclydia.keys()):
         key = input("Select a shape: ")
     Euclydia[key].drive()
+main()
 wn.mainloop()
