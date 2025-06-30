@@ -82,13 +82,13 @@ class Shape(turtle.Turtle):
         self.lines = self.read(line_file)
         self.id_num = Shape.id_num
         Shape.registry.update({self.id_num:self})
-        self.turtle_setup(self)
+        self.turtle_setup(self,colorlist)
         self.start_life()
         Shape.id_num += 1
 
-    def turtle_setup(self):
+    def turtle_setup(self,colorlist):
 
-        self.color(str(self.set_color()))
+        self.color(str(self.set_color(colorlist)))
         self.heading(self.heading)
         self.screen.register_shape(self.id_num,self.outline) 
         self.shape(self.id_num)
