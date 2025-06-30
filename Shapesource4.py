@@ -209,7 +209,7 @@ class Shape(turtle.Turtle):
         return script
 
     def say(self):
-        phrase = random.choice(self.lines)
+        phrase = random.choice(self.read())
         voice = {
             "FC":1,
             "FA":2,
