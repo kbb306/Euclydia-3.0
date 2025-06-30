@@ -82,7 +82,7 @@ class Shape(turtle.Turtle):
         self.lines = line_file
         self.id_num = Shape.id_num
         Shape.registry.update({self.id_num:self})
-        self.turtle_setup(self,colorlist)
+        self.turtle_setup(colorlist)
         self.start_life()
         Shape.id_num += 1
 
