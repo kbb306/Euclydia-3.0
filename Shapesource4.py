@@ -6,6 +6,7 @@ import ggwave
 import simpleaudio as sa
 import threading
 import os
+import numpy as np
 class Color(ABC):
     def __init__(self,colorlist):
           self.color = type(self)
@@ -238,7 +239,10 @@ class Shape(turtle.Turtle):
             }
             def play_audio(voice,phrase):
                 waveform = ggwave.encode(phrase, voice, volume=20)
-                sa.WaveObject(waveform, 1, 2, 48000).play()
+                pcm_wave = (waveform * 32767).astype(np.int16).tobytes()
+                sa.WaveObject(pcm_wave, num_channels=1, bytes_per_sample=2, sample_rate=48000).play()
+
+
 
             threading.Thread(
             target=play_audio,
