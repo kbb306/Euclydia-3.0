@@ -189,11 +189,11 @@ class Shape(turtle.Turtle):
         tick()
 
     def collisions(self,min_dist=20):
-        x1, y1 = self.t.pos()
+        x1, y1 = self.pos()
         for other in Shape.registry.items():
             if other is self:
                 continue
-        x2, y2 = other.t.pos()
+        x2, y2 = other.pos()
         distance = ((x1 - x2)**2 + (y1 - y2)**2)**0.5
         if distance < min_dist:
                 self.left(180)
