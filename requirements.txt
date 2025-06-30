@@ -1,5 +1,5 @@
 # requirements.txt
 turtle  
-simpleaudio
+pyaudio
 numpy
 ggwave  

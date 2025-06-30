@@ -3,7 +3,7 @@ import math
 import random
 from abc import ABC
 import ggwave
-import simpleaudio as sa
+import pyaudio
 import threading
 import os
 import numpy as np
@@ -237,14 +237,43 @@ class Shape(turtle.Turtle):
                 "EU":6
 
             }
-            def play_audio(voice,phrase):
-                waveform = ggwave.encode(phrase, voice, volume=20)
-                if isinstance(waveform, bytes):
-                    pcm_wave = waveform
-                else:
-                    pcm_wave = (waveform * 32767).astype(np.int16).tobytes()
+            
 
-                sa.WaveObject(pcm_wave, 1, 2, 48000).play()
+            def play_audio(protocol, phrase):
+                try:
+                    waveform = ggwave.encode(phrase, protocol, volume=20)
+
+                    if not isinstance(waveform, bytes):
+                        waveform = (waveform * 32767).astype(np.int16).tobytes()
+
+                    p = pyaudio.PyAudio()
+                    stream = p.open(format=pyaudio.paInt16,
+                                    channels=1,
+                                    rate=48000,
+                                    output=True)
+
+                    stream.write(waveform)
+                    stream.stop_stream()
+                    stream.close()
+                    p.terminate()
+
+                except Exception as e:
+                    print(f"[Audio Error] {e}")
+                    fallback = ggwave.encode("WHY DID YOU DO IT?", protocol, volume=20)
+
+                    if not isinstance(fallback, bytes):
+                        fallback = (fallback * 32767).astype(np.int16).tobytes()
+
+                    p = pyaudio.PyAudio()
+                    stream = p.open(format=pyaudio.paInt16,
+                                    channels=1,
+                                    rate=48000,
+                                    output=True)
+
+                    stream.write(fallback)
+                    stream.stop_stream()
+                    stream.close()
+                    p.terminate()
 
 
 
