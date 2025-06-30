@@ -74,7 +74,7 @@ class Shape(turtle.Turtle):
         super().__init__()
         self.X = X
         self.Y = Y
-        self.angle = self.heading()
+        self.angle = heading
         self.sides = sides
         self.length = length
         self.voice = voice
