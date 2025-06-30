@@ -70,10 +70,11 @@ class Shape(turtle.Turtle):
     id_num = 0
     registry = {}  # shared across all Shape instances
     minsize = 6.0
-    def __init__(self,sides,length,X,Y,color,heading,voice,line_file,screen,colorlist,minsize=minsize): #pass screen from Euclydia
+    def __init__(self,name,sides,length,X,Y,color,heading,voice,line_file,screen,colorlist,minsize=minsize): #pass screen from Euclydia
         super().__init__()
         self.X = X
         self.Y = Y
+        self.name = name
         self.set_heading(heading)
         self.sides = sides
         self.length = length
@@ -233,14 +234,14 @@ class Shape(turtle.Turtle):
 
         }
         def play_audio(voice,phrase):
-            waveform = ggwave.encode(phrase, voice, volume=20)
+            waveform = ggwave.encode(voice, phrase, volume=20)
             sa.WaveObject(waveform, 1, 2, 48000).play()
 
-            threading.Thread(
-            target=play_audio(voice,phrase),
-            args=(voice[self.voice], phrase),
-            daemon=True
-            ).start()
+        threading.Thread(
+        target=play_audio,
+        args=(voice[self.voice], phrase),
+        daemon=True
+        ).start()
 
 
     def drive(self):

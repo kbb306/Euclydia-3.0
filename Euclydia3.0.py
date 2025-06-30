@@ -50,7 +50,7 @@ def create(Euclydia,screen,colorlist):
         line_file = "".join(["Resources","/", line_file])
 
     name = input("""    Time to name your shape: """)
-    newshape = Shape(sides,length,X,Y,color,heading,voice,line_file,screen,colorlist,minsize)
+    newshape = Shape(name,sides,length,X,Y,color,heading,voice,line_file,screen,colorlist,minsize)
     print("Rockabye",name+",","please don't you cry....")
     Euclydia.update({name:newshape})
     print("""Your shape is finished!""")
@@ -61,7 +61,7 @@ def load(Euclydia,screen,colorlist):
         loader = csv.reader(f)
         poplist = list(loader)
         for each in poplist:
-            newshape = Shape(each[1],each[2],each[3],each[4],each[5],each[6],each[7],each[8],screen,colorlist)
+            newshape = Shape(each[0],each[1],each[2],each[3],each[4],each[5],each[6],each[7],each[8],screen,colorlist)
             Euclydia.update({each[0]:newshape})
 
 def save(Euclydia):
