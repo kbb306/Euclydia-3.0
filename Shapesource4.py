@@ -94,7 +94,7 @@ class Shape(turtle.Turtle):
         self.set_color(color,colorlist)
         scale = max(math.sqrt(self.get_area()) / 10, minsize)
         self.shapesize(scale)
-        self.penup
+        self.penup()
 
 
     def delete(self):
