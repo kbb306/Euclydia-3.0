@@ -72,13 +72,13 @@ class Shape(turtle.Turtle):
     def __init__(self,X,Y,heading,sides,length,voice,line_file,screen,colorlist): #pass screen from Euclydia
         self.X = X
         self.Y = Y
-        self.heading = heading
+        self.set_heading(heading)
         self.sides = sides
         self.length = length
         self.voice = voice
         self.outline = self.calcpoints()
-        self.bounds = self.screen.window_width(), self.screen.window_height()
         self.screen = screen
+        self.bounds = self.screen.window_width(), self.screen.window_height()
         self.lines = self.read(line_file)
         self.id_num = Shape.id_num
         Shape.registry.update({self.id_num:self})
@@ -89,7 +89,6 @@ class Shape(turtle.Turtle):
     def turtle_setup(self,colorlist):
 
         self.color(str(self.set_color(colorlist)))
-        self.heading(self.heading)
         self.screen.register_shape(self.id_num,self.outline) 
         self.shape(self.id_num)
 
