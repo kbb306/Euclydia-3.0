@@ -28,11 +28,18 @@ def create(Euclydia,colorlist):
     length = int(input("""      What length (irregular polygons are unsupported)?: """))
     gender = 0
     while gender not in [1,2]:
-        gender = int(input("""      Shapes don't have gender like us, but we do need pronouns.
-                                1. She/Her
-                                2. He/Him
+        gender = str(input("""      Shapes don't have gender like us, but we do need pronouns.
+                                    F. She/Her
+                                    M. He/Him
                        
+    
                                 Selection: """))
+    age = 0
+    while age not in [1,2]:
+        age = str(input("""         Is your shape a(n)?
+                                    A. Adult
+                                    C. Child"""))
+    voice = "".join([gender.upper(),age.upper()])
         
     color = input("Select a Color (see Shapesource4.py for a list): ")
 
@@ -45,7 +52,7 @@ def create(Euclydia,colorlist):
         line_file = "".join(["Resources","/", line_file])
 
     name = input("""    Time to name your shape: """)
-    newshape = Shape(X,Y,heading,sides,length,gender,line_file,screen)
+    newshape = Shape(X,Y,heading,sides,length,voice,line_file,screen)
     newshape.set_color(color)
     print("Rockabye",name+",","please don't you cry....")
     Euclydia.update({name:newshape})

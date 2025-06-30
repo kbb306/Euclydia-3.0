@@ -209,7 +209,7 @@ class Shape(turtle.Turtle):
 
     def say(self):
         phrase = random.choice(self.lines)
-        protocol = {
+        voice = {
             "FC":1,
             "FA":2,
             "MC":7,
@@ -218,8 +218,8 @@ class Shape(turtle.Turtle):
             "EU":6
 
         }
-        def play_audio():
-            waveform = ggwave.encode(phrase, protocolId=self.protocol, volume=20)
+        def play_audio(voice):
+            waveform = ggwave.encode(phrase, voice[self.gender], volume=20)
             sa.WaveObject(waveform, 1, 2, 48000).play()
 
         threading.Thread(target=play_audio, daemon=True).start()
