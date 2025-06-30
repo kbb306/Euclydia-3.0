@@ -239,8 +239,12 @@ class Shape(turtle.Turtle):
             }
             def play_audio(voice,phrase):
                 waveform = ggwave.encode(phrase, voice, volume=20)
-                pcm_wave = (waveform * 32767).astype(np.int16).tobytes()
-                sa.WaveObject(pcm_wave, num_channels=1, bytes_per_sample=2, sample_rate=48000).play()
+                if isinstance(waveform, bytes):
+                    pcm_wave = waveform
+                else:
+                    pcm_wave = (waveform * 32767).astype(np.int16).tobytes()
+
+                sa.WaveObject(pcm_wave, 1, 2, 48000).play()
 
 
 
