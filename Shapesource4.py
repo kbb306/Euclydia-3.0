@@ -218,49 +218,55 @@ class Shape(turtle.Turtle):
 
 
     def read(self):
-        path = os.path.join(os.path.dirname(__file__), self.lines)
-        if not os.path.exists(path):
-            print(f"[ERROR] Could not find phrase file: {path}")
+        try:
+            with open(self.lines, 'r', encoding='utf-8') as f:
+                lines = [line.strip() for line in f if line.strip()]
+                if not lines:
+                    raise ValueError("Phrase file is empty.")
+                return lines
+        except Exception as e:
+            print(f"[ERROR] Could not find phrase file: {self.lines}")
             return ["WHY DID YOU DO IT?"]
-        with open(path, encoding='utf-8') as f:
-            return [line.strip() for line in f if line.strip()]
+
 
 
     def say(self):
+        try:
             phrase = random.choice(self.read())
-            voice_map = {
-                "FC":1,
-                "FA":2,
-                "MC":7,
-                "MA":8,
-                "SC":0,
-                "EU":6
+        except Exception as e:
+            print(f"[Phrase Error] {e}")
+            phrase = "WHY DID YOU DO IT?"
 
-            }
-            
+        voice_map = {
+            "FC": 1,
+            "FA": 2,
+            "MC": 7,
+            "MA": 8,
+            "SC": 0,
+            "EU": 6,
+        }
 
-            def play_audio(protocol, phrase):
+        voice_id = voice_map.get(self.voice, 6)  # Default to 'EU' if unknown
+
+        def play_audio(protocol, phrase):
+            try:
+                waveform = ggwave.encode(phrase, protocolId=protocol, volume=20)
+                if not isinstance(waveform, bytes):
+                    waveform = (waveform * 32767).astype(np.int16).tobytes()
+
+                p = pyaudio.PyAudio()
+                stream = p.open(format=pyaudio.paInt16,
+                                channels=1,
+                                rate=48000,
+                                output=True)
+                stream.write(waveform)
+                stream.stop_stream()
+                stream.close()
+                p.terminate()
+            except Exception as e:
+                print(f"[Audio Error] {e}")
                 try:
-                    waveform = ggwave.encode(phrase, protocol, volume=20)
-
-                    if not isinstance(waveform, bytes):
-                        waveform = (waveform * 32767).astype(np.int16).tobytes()
-
-                    p = pyaudio.PyAudio()
-                    stream = p.open(format=pyaudio.paInt16,
-                                    channels=1,
-                                    rate=48000,
-                                    output=True)
-
-                    stream.write(waveform)
-                    stream.stop_stream()
-                    stream.close()
-                    p.terminate()
-
-                except Exception as e:
-                    print(f"[Audio Error] {e}")
-                    fallback = ggwave.encode("WHY DID YOU DO IT?", protocol, volume=20)
-
+                    fallback = ggwave.encode("WHY DID YOU DO IT?", protocolId=protocol, volume=20)
                     if not isinstance(fallback, bytes):
                         fallback = (fallback * 32767).astype(np.int16).tobytes()
 
@@ -269,19 +275,18 @@ class Shape(turtle.Turtle):
                                     channels=1,
                                     rate=48000,
                                     output=True)
-
                     stream.write(fallback)
                     stream.stop_stream()
                     stream.close()
                     p.terminate()
+                except Exception as fallback_error:
+                    print(f"[Fallback Audio Error] {fallback_error}")
 
-
-
-            threading.Thread(
+        threading.Thread(
             target=play_audio,
-            args=(voice_map[self.voice], phrase),
+            args=(voice_id, phrase),
             daemon=True
-            ).start()
+        ).start()
 
 
 def drive(self):
