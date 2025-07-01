@@ -199,6 +199,8 @@ class Shape(turtle.Turtle):
     
 
     def move(self):
+        x, y = self.pos()
+        width, height = self.bounds
         # Slight random turn every so often (5% chance)
         if random.random() < 0.05:
             self.setheading(self.heading() + random.uniform(-10, 10))
@@ -209,12 +211,15 @@ class Shape(turtle.Turtle):
         # Handle collision with other shapes
         self.collisions()
 
-        # Bounce off screen edges gently
-        x, y = self.pos()
-        width, height = self.bounds
-        if abs(x) > width / 2 or abs(y) > height / 2:
+        # ✅ Wrap horizontally (Pac-Man logic)
+        if x < -width / 2:
+            self.setx(width / 2)
+        elif x > width / 2:
+            self.setx(-width / 2)
+
+        # Optional: still bounce vertically
+        if y < -height / 2 or y > height / 2:
             self.setheading((self.heading() + 180) % 360)
-            self.forward(5)
 
 
     def start_life(self):
