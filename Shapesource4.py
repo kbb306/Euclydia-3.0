@@ -221,11 +221,14 @@ class Shape(turtle.Turtle):
             self.setx(-width / 2)
             self.showturtle()
 
-        # Optional: still bounce vertically
-        if abs(y) > height / 2:
+            # Recalculate y after forward + collision
+        _, y = self.pos()
+        if y > height / 2:
+            self.sety(height / 2)
             self.setheading((self.heading() + 180) % 360)
-            self.forward(5)
-
+        elif y < -height / 2:
+            self.sety(-height / 2)
+            self.setheading((self.heading() + 180) % 360)
 
     def start_life(self):
         def tick():
