@@ -213,9 +213,13 @@ class Shape(turtle.Turtle):
 
         # ✅ Wrap horizontally (Pac-Man logic)
         if x < -width / 2:
+            self.hideturtle()
             self.setx(width / 2)
+            self.showturtle()
         elif x > width / 2:
+            self.hideturtle()
             self.setx(-width / 2)
+            self.showturtle()
 
         # Optional: still bounce vertically
         if y < -height / 2 or y > height / 2:
