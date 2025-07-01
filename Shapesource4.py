@@ -222,8 +222,9 @@ class Shape(turtle.Turtle):
             self.showturtle()
 
         # Optional: still bounce vertically
-        if y < -height / 2 or y > height / 2:
+        if abs(y) > height / 2:
             self.setheading((self.heading() + 180) % 360)
+            self.forward(5)
 
 
     def start_life(self):
