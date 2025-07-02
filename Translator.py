@@ -16,7 +16,7 @@ class translator():
         }
         self.middleman = smaz_wrapper()
         self.main()
-        
+
     def main(self):
         while True:
             choice = int(input("""Select an action:
@@ -107,5 +107,5 @@ class translator():
             wf.setsampwidth(2)          # 2 bytes per sample = 16-bit
             wf.setframerate(48000)      # GGWave standard sample rate
             wf.writeframes(pcm_data.tobytes())
-
+Alex = translator()
 
