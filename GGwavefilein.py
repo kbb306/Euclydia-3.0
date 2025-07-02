@@ -42,6 +42,3 @@ class ggwav():
 
         return list(decoder)
         
-translator = ggwav()
-msg = translator.ggwave_from_file(input("Enter a file path: "))
-print(msg)
