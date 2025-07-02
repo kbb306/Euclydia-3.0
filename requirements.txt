@@ -1,5 +1,4 @@
-# requirements.txt
-turtle  
+# requirements.txt  
 pyaudio
 numpy
 ggwave  
