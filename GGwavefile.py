@@ -29,7 +29,7 @@ class ggwavin():
 
         while process.poll() is None:
             packet = process.stdout.read(self.BUFFER_SIZE)
-            print(f"[DEBUG] Read audio packet of size: {len(packet)}")
+            #print(f"[DEBUG] Read audio packet of size: {len(packet)}")
             yield packet
 
         process.wait()
