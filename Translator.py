@@ -73,7 +73,7 @@ class translator():
                 if res:
                     try:
                         codephrase = res
-                        phrase = self.middleman.decode(codephrase)
+                        phrase = self.middleman.decode(codephrase.decode('latin1'))
                         print("Received text:", phrase)
                     except Exception as e:
                         print("[Decode Error]", e, "| Raw:", repr(res))

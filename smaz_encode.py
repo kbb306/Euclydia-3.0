@@ -12,10 +12,8 @@ class smaz_wrapper:
         return encoded
 
     @staticmethod
-    def decode(codephrase: bytes) -> str:
+    def decode(codephrase: str) -> str:
         """Decode a base91-smaz string to original text."""
-        if isinstance(codephrase, bytes):
-            codephrase = codephrase.decode('latin1')
         decoded = b91_decode(codephrase)
         decompressed = smaz.decompress(decoded)
         return decompressed
