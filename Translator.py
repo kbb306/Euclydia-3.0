@@ -103,7 +103,7 @@ class translator():
     def main(self):
         choice = 0
         while True:
-            choice = int(input("""Say, listen, or input file?
+            choice = int(input("""Say, listen, or use file?
                         1. Say
                         2. Listen
                         3. Input file
