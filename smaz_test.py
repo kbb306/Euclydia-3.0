@@ -20,3 +20,4 @@ def main():
         elif selection.upper == "Q":
             print("Goodbye!")
             break
+main()
