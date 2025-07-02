@@ -43,7 +43,7 @@ class translator():
 
                 if decoded:
                     try:
-                        message = decompress(str(decoded))
+                        message = decompress(decoded)
                         print("Received message:", message)
                     except Exception as e:
                         print(f"[Decompression error] {e}")
@@ -70,7 +70,7 @@ class translator():
         # Initialize GGWave decoder
         instance = ggwave.init(
             sampleRate=48000,
-            sampleFormat=ggwave.SampleFormat.GGWAVE_SAMPLE_FORMAT_I16)
+            sampleFormat=ggwave)
 
         try:
             frames = wf.readframes(wf.getnframes())
