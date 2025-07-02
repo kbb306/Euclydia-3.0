@@ -72,6 +72,9 @@ class translator():
                 res = ggwave.decode(instance, data)
                 if res:
                     try:
+                        print("[DEBUG] Type of res:", type(res))
+                        print("[DEBUG] Type after .decode('latin1'):", type(codephrase))
+                        print("[DEBUG] First 10 chars of codephrase:", repr(codephrase[:10]))
                         codephrase = res.decode('latin1')
                         phrase = self.middleman.decode(codephrase)
                         print("Received text:", phrase)
