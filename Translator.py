@@ -17,6 +17,27 @@ class translator():
         self.middleman = smaz_wrapper()
         
         self.main()
+    def main(self):
+        while True:
+            choice = int(input("""Select an action:
+                                1. Play a phrase in Euclydian
+                                2. Listen for a phrase in Euclydian
+                                3. Decode a recording.
+                                4. Create a recording
+                                5. Quit"""))
+            if choice == 1:
+                self.say()
+            elif choice == 2:
+                self.listen()
+            elif choice == 3:
+                file = input("Enter a file path: ")
+                self.filein(file)
+            elif choice == 4:
+                self.fileout()
+            elif choice == 5:
+                print("Goodbye.")
+                break
+
     def say(self):
         p = pyaudio.PyAudio()
 
@@ -72,4 +93,7 @@ class translator():
         for each in out:
             print(each)
 
+    def fileout():
+        phrase = input("Enter a phrase: ")
+        file = input("Enter a filename: ")
 
