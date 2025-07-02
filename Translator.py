@@ -40,6 +40,34 @@ class translator():
 
         self.p.terminate()
 
-    def file(self,file):
-        pass
-        
+    def file(self, file):
+        # Open the .wav file
+        wf = wave.open(file, 'rb')
+
+        # Ensure it's mono, 48000 Hz, 16-bit PCM
+        if wf.getnchannels() != 1 or wf.getsampwidth() != 2 or wf.getframerate() != 48000:
+            print("Unsupported audio format: must be 48000 Hz, 16-bit mono.")
+            return
+
+        # Initialize GGWave decoder
+        instance = ggwave.init()
+
+        try:
+            while True:
+                frames = wf.readframes(1024)
+                if not frames:
+                    break
+
+                decoded = ggwave.decode(instance, frames)
+
+                if decoded:
+                    try:
+                        message = decompress(decoded).decode("utf-8")
+                        print("Received message:", message)
+                    except Exception as e:
+                        print(f"[Decompression error] {e}")
+        finally:
+            ggwave.free(instance)
+            wf.close()
+
+            
