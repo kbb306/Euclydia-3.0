@@ -13,21 +13,23 @@ class translator():
             "SC": 0,
             "EU": 6,
         }
-        self.p = pyaudio.PyAudio()
-        self.main()
         
+        self.main()
+
     def say(self,phrase,voice):
+        p = pyaudio.PyAudio()
         waveform = ggwave.encode(compress(phrase), self.voice_map[voice] , volume = 20)
 
-        stream = self.p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
+        stream = p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
         stream.write(waveform, len(waveform)//4)
         stream.stop_stream()
         stream.close()
 
-        self.p.terminate()
+        p.terminate()
     
     def listen(self):
-        stream = self.p.open(format=pyaudio.paFloat32, channels=1, rate=48000, input=True, frames_per_buffer=1024)
+        p = pyaudio.PyAudio()
+        stream = p.open(format=pyaudio.paFloat32, channels=1, rate=48000, input=True, frames_per_buffer=1024)
 
         print('Listening ... Press Ctrl+C to stop')
         instance = ggwave.init()
@@ -49,7 +51,7 @@ class translator():
         stream.stop_stream()
         stream.close()
 
-        self.p.terminate()
+        p.terminate()
 
     def filein(self, file):
         # Open the .wav file
