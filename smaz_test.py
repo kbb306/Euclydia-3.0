@@ -7,6 +7,6 @@ print("You entered:",phrase)
 print("Smaz gave me:",codephrase)
 print("Which translates to:",decode)
 if decode == phrase:
-    print("Test passsed! ")
+    print("Test passsed!")
 else:
     print("Test failed!")
