@@ -1,5 +1,5 @@
 import smaz
-class SmazWrapper:
+class smaz_wrapper:
     @staticmethod
     def encode(phrase: str) -> str:
         """Compress text and return a latin1-safe string."""
