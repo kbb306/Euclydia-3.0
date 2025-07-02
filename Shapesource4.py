@@ -30,7 +30,7 @@ class Speech:
         
         except Exception:
             #print("[Compression] All methods failed, using raw phrase.")
-            self.codephrase = self.phrase.encode("latin1")
+            self.codephrase = self.phrase.encode("latin1").decode("latin1")
 
     def playback(self):
         p = pyaudio.PyAudio()
