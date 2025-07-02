@@ -89,8 +89,12 @@ class translator():
 
     def filein(self, file):
         readaloud = ggwavin()
+        print("[DEBUG] Reading:", file)
         compressed = readaloud.ggwave_from_file(file)
+        hit = False
         for each in compressed:
+            print("[DEBUG] Got from file:", repr(each))
+            hit = True
             if not each or not isinstance(each, str) or len(each) < 3:
                 print("[Skip] Invalid or empty signal:", repr(each))
                 continue
@@ -99,6 +103,9 @@ class translator():
                 print("Received text:", phrase)
             except Exception as e:
                 print("[Decode Error]", e, "| Raw:", repr(each))
+        if not hit:
+            print("[WARN] No signals decoded from file.")
+
 
     def fileout(self, file):
         talksay = ggwavout(file)
