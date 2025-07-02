@@ -90,25 +90,36 @@ class translator():
 
         p.terminate()
 
-    def filein(self, file):
-        readaloud = ggwavin()
-        #print("[DEBUG] Reading:", file)
-        compressed = readaloud.ggwave_from_file(file)
-        hit = False
-        for each in compressed:
-            #print("[DEBUG] Got from file:", repr(each))
-            hit = True
-            if not each or not isinstance(each, str) or len(each) < 3:
-                #print("[Skip] Invalid or empty signal:", repr(each))
-                continue
-            try:
-                phrase = self.middleman.decode(each)
-                #print("Received text:", phrase)
-            except Exception as e:
-                print("[Decode Error]", e, "| Raw:", repr(each))
-        if not hit:
-            print("[WARN] No signals decoded from file.")
+    def filein(self, filename: str):
+        print("[DEBUG] Starting decode loop...")
+        audio = self.read_audio(filename)
+        instance = ggwave.init()
 
+        decoded_count = 0
+
+        for chunk in audio:
+            if not chunk:
+                print("[DEBUG] No data read from ffmpeg.")
+                continue
+
+            res = ggwave.decode(instance, chunk)
+            if res is not None:
+                print(f"[DEBUG] Raw decode: {repr(res)}")
+                try:
+                    codephrase = res.decode('latin1')
+                    phrase = self.middleman.decode(codephrase)
+                    print("Received text:", phrase)
+                    decoded_count += 1
+                except Exception as e:
+                    print("[Decode Error]", e, "| Raw:", repr(res))
+            else:
+                print("[DEBUG] Chunk did not decode.")
+
+        ggwave.free(instance)
+
+        print(f"[DEBUG] Decoded {decoded_count} messages.")
+        if decoded_count == 0:
+            print("[WARN] No signals decoded from file.")
 
     def fileout(self, file):
         talksay = ggwavout(file)
