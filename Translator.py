@@ -43,7 +43,7 @@ class translator():
 
                 if decoded:
                     try:
-                        message = decompress(decoded).decode("utf-8")
+                        message = decompress(str(decoded)).decode("utf-8")
                         print("Received message:", message)
                     except Exception as e:
                         print(f"[Decompression error] {e}")
@@ -80,7 +80,7 @@ class translator():
 
                 if decoded:
                     try:
-                        message = decompress(decoded).decode("utf-8")
+                        message = decompress(str(decoded).decode("utf-8"))
                         print("Received message:", message)
                     except Exception as e:
                         print(f"[Decompression error] {e}")
