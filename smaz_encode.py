@@ -1,5 +1,4 @@
 import smaz
-import base64
 from base91 import encode as b91_encode, decode as b91_decode
 class smaz_wrapper:
     @staticmethod
