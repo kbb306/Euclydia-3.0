@@ -25,21 +25,14 @@ class Speech:
         try:
             from smaz import compress
             self.codephrase = compress(self.phrase)
+        
         except Exception:
-                try:
-                    import brotli
-                    self.codephrase = brotli.compress(self.phrase.encode("utf-8"))
-                except Exception:
-                    try:
-                        import lz4.frame
-                        self.codephrase = lz4.frame.compress(self.phrase.encode("utf-8"))
-                    except Exception:
-                        #print("[Compression] All methods failed, using raw phrase.")
-                        self.codephrase = self.phrase.encode("utf-8")
+            #print("[Compression] All methods failed, using raw phrase.")
+            self.codephrase = self.phrase.encode("utf-8")
 
     def playback(self):
         p = pyaudio.PyAudio()
-        self.waveform = ggwave.encode(self.codephrase, self.voice, volume = 20)
+        self.waveform = ggwave.encode(self.codephrase.hex(), self.voice, volume = 20)
         stream = p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
         stream.write(self.waveform, len(self.waveform)//4)
         stream.stop_stream()
