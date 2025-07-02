@@ -1,16 +1,21 @@
-from smaz import compress, decompress
+import smaz
+print("Using smaz from:", smaz.__file__)
+from smaz import compress
+print(compress("test"), type(compress("test")))
 
 def encode():
     phrase = input("Enter <100 characters of text: ")
-    codephrase = compress(phrase)
+    codephrase = smaz.compress(phrase)
+    out = codephrase.encode('latin1')
+    print("Compressed type:", type(codephrase))
     print("Compressed:", codephrase)  # shows raw bytes
     print("Printable (paste into decode):", codephrase.decode('latin1'))  # for input reuse
 
 def decode():
-    codephrase = input("Enter compressed text: ")
+    codephrase = input("Enter compressed text: ").encode('latin1')
     try:
-        codebytes = codephrase.encode('latin1')  # convert string back to bytes
-        phrase = decompress(codebytes)
+        codebytes = codephrase.decode('latin1')  # convert string back to bytes
+        phrase = smaz.decompress(codebytes)
         print("Decompressed:", phrase)
     except Exception as e:
         print("Error during decompression:", e)

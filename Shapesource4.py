@@ -25,7 +25,7 @@ class Speech:
         self.voice = voice
         try:
             from smaz import compress
-            self.codephrase = compress(self.phrase)
+            self.codephrase = compress(self.phrase).encode('latin1')
         
         except Exception:
             #print("[Compression] All methods failed, using raw phrase.")
