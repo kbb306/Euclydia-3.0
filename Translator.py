@@ -62,7 +62,7 @@ class translator():
     def filein(filepath):
         # Open the WAV file—must be 48 kHz mono 32‑bit float RAW
         wf = wave.open(filepath, 'rb')
-        assert wf.getframerate() == 48000, "WAV must be 48 kHz"
+        assert wf.getframerate() == 48000, "WAV must be 48 kHz"
         assert wf.getnchannels() == 1, "WAV must be mono"
         
         # Initialize ggwave decoder
@@ -72,7 +72,7 @@ class translator():
         # Read chunks
         chunk_size = 1024 * wf.getsampwidth()
         while True:
-            data = wf.readframes(1024)
+            data = wf.readframes(chunk_size)
             if not data:
                 break
             res = ggwave.decode(instance, data)
