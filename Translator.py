@@ -15,8 +15,8 @@ class translator():
             "EU": 6,
         }
         self.middleman = smaz_wrapper()
-        
         self.main()
+        
     def main(self):
         while True:
             choice = int(input("""Select an action:
@@ -93,7 +93,19 @@ class translator():
         for each in out:
             print(each)
 
-    def fileout():
+    def fileout(self):
         phrase = input("Enter a phrase: ")
+        print(self.voice_map.keys())
+        voice = input("Enter a voice: ")
         file = input("Enter a filename: ")
+        codephrase = self.middleman.encode(phrase)
+        waveform = ggwave.encode(codephrase,self.voice_map[voice],volume=100)
+        samples = np.frombuffer(waveform, dtype=np.float32)
+        pcm_data = np.int16(samples * 32767)  # scale to int16 range
+        with wave.open(file, 'wb') as wf:
+            wf.setnchannels(1)          # mono
+            wf.setsampwidth(2)          # 2 bytes per sample = 16-bit
+            wf.setframerate(48000)      # GGWave standard sample rate
+            wf.writeframes(pcm_data.tobytes())
+
 
