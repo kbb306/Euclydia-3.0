@@ -130,5 +130,9 @@ class translator():
                 voice = input("Enter a voice: ")
                 phrase = input("Enter a short phrase (<100 characters): ")
                 self.fileout(phrase,self.voice_map[voice],path)
+            
+            elif choice == 5:
+                print("Goodbye!")
+                break
         
                     
