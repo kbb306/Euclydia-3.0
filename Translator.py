@@ -35,6 +35,7 @@ class translator():
                 file = input("Enter a file path: ")
                 self.filein(file)
             elif choice == 4:
+                file = input("Enter a file path: ")
                 self.fileout()
             elif choice == 5:
                 print("Goodbye.")
@@ -97,6 +98,6 @@ class translator():
         print(self.voice_map.keys())
         voice = input("Enter a voice: ")
         talksay.out(phrase,self.voice_map[voice])
-        
+
 Alex = translator()
 
