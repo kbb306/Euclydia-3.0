@@ -3,3 +3,4 @@ turtle
 pyaudio
 numpy
 ggwave  
+pySmaz

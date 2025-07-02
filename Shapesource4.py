@@ -8,6 +8,7 @@ import threading
 import os
 import numpy as np
 import tkinter as tk
+from smaz import compress, decompress
 
 speech_window = None
 def init_speech_window():
