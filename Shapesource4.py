@@ -8,7 +8,12 @@ import threading
 import os
 import numpy as np
 import tkinter as tk
-from smaz import compress, decompress
+try:
+    from smaz import compress, decompress
+except:
+    import brotli
+finally: 
+    import lz4
 
 speech_window = None
 def init_speech_window():
