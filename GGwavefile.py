@@ -36,20 +36,25 @@ class ggwavin():
 
     def ggwave_decode(self, audio):
         for chunk in audio:
-            print(f"[DEBUG] Decoding audio chunk of size: {len(chunk)}")
+            #print(f"[DEBUG] Decoding audio chunk of size: {len(chunk)}")
             res = ggwave.decode(self.instance, chunk)
             if res:
                 text = res.decode("latin1")
-                print(f"[DEBUG] Decoded text: {repr(text)}")
+                #print(f"[DEBUG] Decoded text: {repr(text)}")
                 yield text
 
     def ggwave_from_file(self, filename):
-        print(f"[DEBUG] Starting ggwave_from_file with: {filename}")
         audio = self.read_audio(filename)
         decoder = self.ggwave_decode(audio)
+
+        print("[DEBUG] Starting decode loop...")
+        count = 0
         for msg in decoder:
-            print("[DEBUG] Yielding:", repr(msg))
+            print("[GGwave Output]", repr(msg))
+            count += 1
             yield msg
+
+        print(f"[DEBUG] Decoded {count} messages.")
 
 
 class ggwavout():
