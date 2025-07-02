@@ -15,7 +15,7 @@ class ggwav():
     def read_audio(self,filename):
         process = (ffmpeg
             .input(filename)
-            .output('-', format='f32le', acodec='pcm_f32le', ar=4800, ac=1)
+            .output('-', format='f32le', acodec='pcm_f32le', ar=48000, ac=1)
             .global_args('-map_metadata', '-1', '-vn')
             .overwrite_output()
             .run_async(pipe_stdout=True)
