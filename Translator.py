@@ -5,6 +5,7 @@ import wave
 class translator():
     def __init__(self):
         self.p = pyaudio.PyAudio()
+        self.main()
     def say(self,phrase):
         waveform = ggwave.encode(compress(phrase), protocolId = 1, volume = 20)
 
