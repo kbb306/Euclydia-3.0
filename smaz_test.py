@@ -3,9 +3,8 @@ from smaz import compress, decompress
 def encode():
     phrase = input("Enter <100 characters of text: ")
     codephrase = compress(phrase)
-    print(type(codephrase))
     print("Compressed:", codephrase)  # shows raw bytes
-    print("Printable (paste into decode):", codephrase.encode("latin1").decode('latin1'))  # for input reuse
+    print("Printable (paste into decode):", codephrase.decode('latin1'))  # for input reuse
 
 def decode():
     codephrase = input("Enter compressed text: ")
