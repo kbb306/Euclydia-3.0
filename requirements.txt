@@ -6,4 +6,3 @@ ggwave
 git+https://github.com/CordySmith/PySmaz.git
 ffmpeg
 ffmpeg-python
-base91
