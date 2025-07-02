@@ -36,7 +36,7 @@ class translator():
                 self.filein(file)
             elif choice == 4:
                 file = input("Enter a file path: ")
-                self.fileout()
+                self.fileout(file)
             elif choice == 5:
                 print("Goodbye.")
                 break
