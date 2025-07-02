@@ -94,7 +94,7 @@ class translator():
         #Compress the phrase
         codephrase = compress(phrase)
         # Encode the phrase with GGWave
-        waveform = ggwave.encode(phrase,self.voice_map[voice], volume=20)
+        waveform = ggwave.encode(codephrase,self.voice_map[voice], volume=20)
 
         # Convert from float32 (used by ggwave) to int16 PCM
         samples = np.frombuffer(waveform, dtype=np.float32)
