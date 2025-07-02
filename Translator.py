@@ -91,6 +91,7 @@ class translator():
         compressed = readaloud.ggwave_from_file(file)
         for each in compressed:
             if each is None:
+                print("Error, skipping none.")
                 continue
             try:
                 phrase = self.middleman.decode(each)

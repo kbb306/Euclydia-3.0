@@ -41,7 +41,8 @@ class ggwavin():
     def ggwave_from_file(self,filename):
         audio = self.read_audio(filename)
         decoder = self.ggwave_decode(audio)
-        return decoder
+        for msg in decoder:
+            yield msg
         
 class ggwavout():
     def __init__(self,filename):
