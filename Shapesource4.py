@@ -13,7 +13,7 @@ try:
 except:
     import brotli
 finally: 
-    import lz4
+    import lz4.frame 
 
 speech_window = None
 def init_speech_window():
@@ -28,9 +28,15 @@ class Speech:
     def __init__(self,phrase,voice):
         self.phrase = phrase
         self.voice = voice
+        try:
+            self.codephrase = compress(self.phrase)
+        except ImportError:
+            self.codephrase = brotli.compress(self.phrase)
+        except ImportError:
+            self.codephrase = lz4.frame.compress(self.phrase)
     def playback(self):
         p = pyaudio.PyAudio()
-        self.waveform = ggwave.encode(self.phrase, self.voice, volume = 20)
+        self.waveform = ggwave.encode(self.codephrase, self.voice, volume = 20)
         stream = p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
         stream.write(self.waveform, len(self.waveform)//4)
         stream.stop_stream()
