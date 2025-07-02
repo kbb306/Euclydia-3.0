@@ -26,7 +26,7 @@ class Speech:
         self.voice = voice
         self.translator = smaz_wrapper()
         try:
-            self.codephrase = self.translator.encode(self.codephrase)
+            self.codephrase = self.translator.encode(self.phrase)
         
         except Exception:
             #print("[Compression] All methods failed, using raw phrase.")
