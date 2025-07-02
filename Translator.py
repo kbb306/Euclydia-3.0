@@ -72,8 +72,8 @@ class translator():
                 res = ggwave.decode(instance, data)
                 if res:
                     try:
-                        codephrase = res
-                        phrase = self.middleman.decode(codephrase.decode('latin1'))
+                        codephrase = res.decode('latin1')
+                        phrase = self.middleman.decode(codephrase)
                         print("Received text:", phrase)
                     except Exception as e:
                         print("[Decode Error]", e, "| Raw:", repr(res))
