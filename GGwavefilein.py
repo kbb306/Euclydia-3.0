@@ -1,6 +1,7 @@
 import ggwave
 import pyaudio
 import ffmpeg
+import subprocess
 class ggwav():
     """Credit to franga2000 on github: https://github.com/franga2000"""
     def __init__(self):
@@ -18,7 +19,7 @@ class ggwav():
             .output('-', format='f32le', acodec='pcm_f32le', ar=48000, ac=1)
             .global_args('-map_metadata', '-1', '-vn')
             .overwrite_output()
-            .run_async(pipe_stdout=True)
+            .run_async(pipe_stdout=True, pipe_stderr=subprocess.DEVNULL)
         )
 
         while process.poll() is None:
