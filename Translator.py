@@ -118,6 +118,7 @@ class translator():
                         2. Listen
                         3. Input file
                         4. Output file
+                        5. Exit
                         
                         Choice: """))
             
