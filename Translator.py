@@ -92,16 +92,27 @@ class translator():
 
     def filein(self, filename: str):
         seen = set()
-        for codephrase in ggwave_from_file(filename):
+        codephrases, stderr_output = ggwave_from_file(filename)
+
+        if stderr_output:
+            print("[FFmpeg stderr]", stderr_output)
+
+        if not codephrases:
+            print("[WARN] No codephrases decoded.")
+            return
+
+        for codephrase in codephrases:
             try:
-                phrase = self.middleman.decode(codephrase)
+                phrase = self.middleman.decode(codephrase.decode('latin1'))
                 if phrase not in seen:
-                    seen.add(phrase)
-                    print("Decoded phrase:", phrase)
+                     seen.add(phrase)
+                     print("Decoded phrase:", phrase)
             except Exception as e:
                 print("[Decode Error]", e, "| Raw:", repr(codephrase))
 
 
+
+        
     def fileout(self, file):
         talksay = ggwavout(file)
         phrase = input("Enter a phrase: ")
