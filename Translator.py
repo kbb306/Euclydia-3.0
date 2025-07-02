@@ -68,22 +68,23 @@ class translator():
             return
 
         # Initialize GGWave decoder
-        instance = ggwave.init()
+        instance = ggwave.init(
+            sampleRate=48000,
+            sampleFormat=ggwave.SampleFormat.GGWAVE_SAMPLE_FORMAT_I16)
 
         try:
-            while True:
-                frames = wf.readframes(1024)
-                if not frames:
-                    break
+            frames = wf.readframes(wf.getnframes())
+            decoded = ggwave.decode(instance, frames)
 
-                decoded = ggwave.decode(instance, frames)
+            if decoded:
+                try:
+                    message = decompress(decoded)
+                    print("Received message:", message)
+                except Exception as e:
+                    print(f"[Decompression error] {e}")
+            else:
+                print("[GGWave] No signal decoded.")
 
-                if decoded:
-                    try:
-                        message = decompress(str(decoded))
-                        print("Received message:", message)
-                    except Exception as e:
-                        print(f"[Decompression error] {e}")
         finally:
             ggwave.free(instance)
             wf.close()
