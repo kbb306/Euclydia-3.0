@@ -12,12 +12,10 @@ class smaz_wrapper:
 
     @staticmethod
     def decode(codephrase: str) -> str:
-        print("[DEBUG] Decoding input:", repr(codephrase))
-        print("[DEBUG] Type of codephrase:", type(codephrase))
-        for i, c in enumerate(codephrase[:10]):
-            print(f"[DEBUG] Char {i}: {repr(c)}, type={type(c)}")
         decoded = b91_decode(codephrase)
-        print(decoded)
+        # smaz.decompress expects str, not bytes
+        if isinstance(decoded, bytes):
+            decoded = decoded.decode("latin1")  # or utf-8 if consistent
         return smaz.decompress(decoded)
 
         
