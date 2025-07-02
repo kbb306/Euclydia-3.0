@@ -17,6 +17,7 @@ class smaz_wrapper:
         for i, c in enumerate(codephrase[:10]):
             print(f"[DEBUG] Char {i}: {repr(c)}, type={type(c)}")
         decoded = b91_decode(codephrase)
+        print(decoded)
         return smaz.decompress(decoded)
 
         
