@@ -13,8 +13,11 @@ class smaz_wrapper:
 
     @staticmethod
     def decode(codephrase: str) -> str:
-        """Decode a base91-smaz string to original text."""
+        print("[DEBUG] Decoding input:", repr(codephrase))
+        print("[DEBUG] Type of codephrase:", type(codephrase))
+        for i, c in enumerate(codephrase[:10]):
+            print(f"[DEBUG] Char {i}: {repr(c)}, type={type(c)}")
         decoded = b91_decode(codephrase)
-        decompressed = smaz.decompress(decoded)
-        return decompressed
+        return smaz.decompress(decoded)
+
         
