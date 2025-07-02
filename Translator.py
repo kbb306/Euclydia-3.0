@@ -15,8 +15,9 @@ class translator():
         }
         self.p = pyaudio.PyAudio()
         self.main()
+        
     def say(self,phrase,voice):
-        waveform = ggwave.encode(compress(phrase), protocolId =self.voice_map[voice] , volume = 20)
+        waveform = ggwave.encode(compress(phrase), self.voice_map[voice] , volume = 20)
 
         stream = self.p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
         stream.write(waveform, len(waveform)//4)
@@ -84,7 +85,7 @@ class translator():
 
     def fileout(self, phrase, voice, filename):
         # Encode the phrase with GGWave
-        waveform = ggwave.encode(phrase, protocolId=self.voice_map[voice], volume=20)
+        waveform = ggwave.encode(phrase, self.voice_map[voice], volume=20)
 
         # Convert from float32 (used by ggwave) to int16 PCM
         samples = np.frombuffer(waveform, dtype=np.float32)
