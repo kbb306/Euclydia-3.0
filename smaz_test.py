@@ -13,11 +13,11 @@ def decode():
 def main():
    while True:
         selection = input("Encode or Decode (Or Quit)? ")
-        if selection.upper == "E":
+        if selection.upper() == "E":
             encode()
-        elif selection.upper == "D":
+        elif selection.upper() == "D":
             decode()
-        elif selection.upper == "Q":
+        elif selection.upper() == "Q":
             print("Goodbye!")
             break
 main()
