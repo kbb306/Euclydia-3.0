@@ -32,7 +32,7 @@ class ggwav():
         for chunk in audio:
             res = ggwave.decode(self.instance, chunk)
             if res:
-                text = res.decode("utf-8")
+                text = res.decode("latin1")
                 yield text
 
 
