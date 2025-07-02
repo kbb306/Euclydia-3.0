@@ -63,8 +63,9 @@ class translator():
     def filein(self,path):
         Ear = ggwav()
         codephrase = Ear.ggwave_from_file(path)
-        phrase = decompress(codephrase)
-        print(phrase)
+        for each in codephrase:
+            print(decompress(each))
+        
 
     def fileout(self, phrase, voice, filename):
         #Compress the phrase

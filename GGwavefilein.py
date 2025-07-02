@@ -39,6 +39,5 @@ class ggwav():
         audio = self.read_audio(filename)
         decoder = self.ggwave_decode(audio)
 
-        for msg in decoder:
-            return msg
+        return decoder
         
