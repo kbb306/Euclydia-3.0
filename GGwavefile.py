@@ -2,7 +2,9 @@ import ggwave
 import pyaudio
 import ffmpeg
 import subprocess
-class ggwav():
+import numpy as np
+import wave
+class ggwavin():
     """Credit to franga2000 on github: https://github.com/franga2000"""
     def __init__(self):
         # FRAME_SIZE=4  # 32-bit samples @ 1 channel
@@ -42,3 +44,26 @@ class ggwav():
         for msg in decoder:
             return msg
         
+class ggwavout():
+    def __init__(self,filename):
+        # Parameters
+        self.volume_ = 20
+        self.sample_rate_ = 48000
+        self.filename = filename
+
+    def out(self,phrase,voice):
+        # Generate audio waveform for string "hello python"
+        waveform = ggwave.encode(phrase, voice, volume=self.volume_)
+
+        # Convert byte data into float32
+        waveform_float32 = np.frombuffer(waveform, dtype=np.float32)
+
+        # Normalize the float32 data to the range of int16
+        waveform_int16 = np.int16(waveform_float32 * 32767)
+
+        # Save the waveform to a .wav file
+        with wave.open(self.filename, "wb") as wf:
+            wf.setnchannels(1)                  # mono audio
+            wf.setsampwidth(2)                  # 2 bytes per sample (16-bit PCM)
+            wf.setframerate(self.sample_rate_)       # sample rate
+            wf.writeframes(waveform_int16.tobytes())  # write the waveform as bytes        
