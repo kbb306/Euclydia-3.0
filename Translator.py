@@ -92,11 +92,11 @@ class translator():
         for each in compressed:
             if each is None:
                 continue
-        try:
-            phrase = self.middleman.decode(each)
-            print("Recieved text:",phrase)
-        except Exception as e:
-            print("[Decode Error]", e)
+            try:
+                phrase = self.middleman.decode(each)
+                print("Recieved text:",phrase)
+            except Exception as e:
+                print("[Decode Error]", e)
 
     def fileout(self,file):
         talksay = ggwavout(file)
