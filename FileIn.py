@@ -38,5 +38,5 @@ def ggwave_from_file(filename):
 	decoder = ggwave_decode(audio)
 
 	for msg in decoder:
-		print(msg)
+		yield msg
 	

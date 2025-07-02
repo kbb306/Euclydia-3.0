@@ -91,9 +91,13 @@ class translator():
         p.terminate()
 
     def filein(self, filename: str):
-        phrase = ggwave_from_file(filename)
-        out = self.middleman.decode(phrase)
-        print(out)
+        for codephrase in ggwave_from_file(filename):
+            try:
+                phrase = self.middleman.decode(codephrase)
+                print("Decoded phrase:", phrase)
+            except Exception as e:
+                print("[Decode Error]", e, "| Raw:", repr(codephrase))
+
 
         
     def fileout(self, file):
