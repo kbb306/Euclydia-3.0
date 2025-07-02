@@ -1,20 +1,14 @@
 import smaz
-#print("Using smaz from:", smaz.__file__)
+class SmazWrapper:
+    @staticmethod
+    def encode(phrase: str) -> str:
+        """Compress text and return a latin1-safe string."""
+        compressed = smaz.compress(phrase)      # returns str in your version
+        return compressed.encode('latin1').decode('latin1')
 
-class smaz_wrapper(smaz):
-    def __init__(self):
-        super.__init__(self)
-        
-    def encode(self,phrase):
-        codephrase = self.compress(phrase)
-        bytes = codephrase.encode('latin1')
-        out = bytes.decode('latin1')
-        return out
-
-    def decode(self,codephrase):
-        out = self.decompress(codephrase)
-        return out
-
-
-
-
+    @staticmethod
+    def decode(codephrase: str) -> str:
+        """Decode a latin1-safe string to original text."""
+        compressed = codephrase.encode('latin1')  # back to bytes
+        decompressed = smaz.decompress(compressed.decode('latin1'))
+        return decompressed
