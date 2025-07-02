@@ -1,5 +1,6 @@
 # requirements.txt  
 pyaudio
+simpleaudio
 numpy
 ggwave  
 git+https://github.com/CordySmith/PySmaz.git
