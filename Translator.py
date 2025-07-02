@@ -5,8 +5,6 @@ import wave
 import numpy as np
 class translator():
     def __init__(self):
-        self.p = pyaudio.PyAudio()
-        self.main()
         self.voice_map = {
             "FC": 2,
             "FA": 1,
@@ -15,6 +13,8 @@ class translator():
             "SC": 0,
             "EU": 6,
         }
+        self.p = pyaudio.PyAudio()
+        self.main()
     def say(self,phrase,voice):
         waveform = ggwave.encode(compress(phrase), protocolId =self.voice_map[voice] , volume = 20)
 
