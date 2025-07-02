@@ -95,6 +95,7 @@ class translator():
         codephrases, stderr_output = ggwave_from_file(filename)
 
         if stderr_output:
+            pass
             print("[FFmpeg stderr]", stderr_output)
 
         if not codephrases:
