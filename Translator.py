@@ -87,13 +87,9 @@ class translator():
 
     def filein(self,file):
         readaloud = ggwav()
-        compressed_list = readaloud.ggwave_from_file(file)
-        out = []
-        for each in compressed_list:
-            unzip = self.middleman.decode(each)
-            out.append(unzip)
-        for each in out:
-            print(each)
+        compressed = readaloud.ggwave_from_file(file)
+        phrase = self.middleman.decode(compressed)
+        print(phrase)
 
     def fileout(self):
         phrase = input("Enter a phrase: ")
