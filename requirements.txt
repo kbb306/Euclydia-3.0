@@ -4,5 +4,3 @@ pyaudio
 numpy
 ggwave  
 pySmaz
-brotli
-lz4
