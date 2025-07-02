@@ -8,7 +8,7 @@ class translator():
     def say(self,phrase):
         waveform = ggwave.encode(compress(phrase), protocolId = 1, volume = 20)
 
-        stream = p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
+        stream = self.p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
         stream.write(waveform, len(waveform)//4)
         stream.stop_stream()
         stream.close()
