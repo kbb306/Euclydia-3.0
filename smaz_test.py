@@ -14,7 +14,7 @@ def encode():
 def decode():
     codephrase = input("Enter compressed text: ").encode('latin1')
     try:
-        codebytes = codephrase.decode('latin1')  # convert string back to bytes
+        codebytes = codephrase.decode('latin1')  
         phrase = smaz.decompress(codebytes)
         print("Decompressed:", phrase)
     except Exception as e:
