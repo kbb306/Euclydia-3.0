@@ -42,6 +42,7 @@ class ggwavin():
         audio = self.read_audio(filename)
         decoder = self.ggwave_decode(audio)
         for msg in decoder:
+            print("[DEBUG] Yielding:", repr(msg))
             yield msg
         
 class ggwavout():
