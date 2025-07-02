@@ -18,6 +18,7 @@ class translator():
 
     def say(self,phrase,voice):
         codephrase = compress(phrase)
+        print(codephrase)
         p = pyaudio.PyAudio()
         waveform = ggwave.encode(codephrase, self.voice_map[voice] , volume = 20)
 
@@ -38,12 +39,15 @@ class translator():
         try:
             while True:
                 data = stream.read(1024, exception_on_overflow=False)
-                res = decompress(ggwave.decode(instance, data))
-                if (not res is None):
+                decoded = ggwave.decode(instance, data)
+
+                if decoded:
                     try:
-                        print('Received text: ' + res.decode("utf-8"))
-                    except:
-                        pass
+                        message = decompress(decoded).decode("utf-8")
+                        print("Received message:", message)
+                    except Exception as e:
+                        print(f"[Decompression error] {e}")
+
         except KeyboardInterrupt:
             pass
 
