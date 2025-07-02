@@ -28,11 +28,17 @@ class ggwavin():
         )
 
         while process.poll() is None:
-            packet = process.stdout.read(self.BUFFER_SIZE)
-            #print(f"[DEBUG] Read audio packet of size: {len(packet)}")
+            packet = process.stdout.read(4096)
+            if not packet:
+                print("[DEBUG] No data read from ffmpeg.")
+            else:
+                print("[DEBUG] Read packet of size:", len(packet))
             yield packet
 
         process.wait()
+
+
+
 
     def ggwave_decode(self, audio):
         for chunk in audio:
