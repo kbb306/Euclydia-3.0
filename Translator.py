@@ -3,6 +3,7 @@ import pyaudio
 from smaz import compress, decompress
 import wave
 import numpy as np
+from GGwavefilein import *
 class translator():
     def __init__(self):
         self.voice_map = {
@@ -59,29 +60,8 @@ class translator():
         p.terminate()
 
 
-    def filein(filepath):
-        # Open the WAV file—must be 48 kHz mono 32‑bit float RAW
-        wf = wave.open(filepath, 'rb')
-        assert wf.getframerate() == 48000, "WAV must be 48 kHz"
-        assert wf.getnchannels() == 1, "WAV must be mono"
-        
-        # Initialize ggwave decoder
-        params = ggwave.getDefaultParameters()
-        instance = ggwave.init(params)
-        
-        # Read chunks
-        chunk_size = 1024 * wf.getsampwidth()
-        while True:
-            data = wf.readframes(chunk_size)
-            if not data:
-                break
-            res = ggwave.decode(instance, data)
-            if res:
-                text = res.decode('utf-8', errors='ignore')
-                print("Decoded:", text)
-
-        wf.close()
-        ggwave.free(instance)
+    def filein(self,path):
+        ggwav.ggwave_from_file(path)
 
     def fileout(self, phrase, voice, filename):
         #Compress the phrase

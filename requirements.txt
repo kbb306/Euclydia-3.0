@@ -3,3 +3,4 @@ pyaudio
 numpy
 ggwave  
 git+https://github.com/CordySmith/PySmaz.git
+ffmepeg
