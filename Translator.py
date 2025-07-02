@@ -96,7 +96,7 @@ class translator():
 
         if stderr_output:
             pass
-            print("[FFmpeg stderr]", stderr_output)
+            #print("[FFmpeg stderr]", stderr_output)
 
         if not codephrases:
             print("[WARN] No codephrases decoded.")
