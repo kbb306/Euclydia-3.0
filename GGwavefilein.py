@@ -6,7 +6,7 @@ class ggwav():
     def __init__(self):
         # FRAME_SIZE=4  # 32-bit samples @ 1 channel
         self.FRAME_SIZE = 4
-        self.BUFFER_SIZE = 1024*FRAME_SIZE
+        self.BUFFER_SIZE = 1024*self.FRAME_SIZE
 
         parameters = ggwave.getDefaultParameters()
         parameters["payloadLength"] = 16
