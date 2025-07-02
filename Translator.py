@@ -1,9 +1,10 @@
+# file: Translator.py
+
 import ggwave
 import pyaudio
-import wave
-import numpy as np
 from GGwavefile import *
 from smaz_encode import *
+
 class translator():
     def __init__(self):
         self.voice_map = {
@@ -25,7 +26,7 @@ class translator():
                                 3. Decode a recording.
                                 4. Create a recording
                                 5. Quit
-                                
+
                                Selection: """))
             if choice == 1:
                 self.say()
@@ -48,11 +49,10 @@ class translator():
         codephrase = self.middleman.encode(phrase)
         print(self.voice_map.keys())
         voice = input("Select a voice: ")
-        waveform = ggwave.encode(codephrase, self.voice_map[voice], volume = 20)
+        waveform = ggwave.encode(codephrase, self.voice_map[voice], volume=20)
 
-        
         stream = p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
-        stream.write(waveform, len(waveform)//4)
+        stream.write(waveform, len(waveform) // 4)
         stream.stop_stream()
         stream.close()
 
@@ -70,12 +70,13 @@ class translator():
             while True:
                 data = stream.read(1024, exception_on_overflow=False)
                 res = ggwave.decode(instance, data)
-                if (not res is None):
+                if res:
                     try:
-                        phrase = self.middleman.decode(res.decode('latin1'))
-                        print("Recieved text:"+ phrase)
-                    except:
-                        pass
+                        codephrase = res.decode('latin1')
+                        phrase = self.middleman.decode(codephrase)
+                        print("Received text:", phrase)
+                    except Exception as e:
+                        print("[Decode Error]", e, "| Raw:", repr(res))
         except KeyboardInterrupt:
             pass
 
@@ -86,26 +87,25 @@ class translator():
 
         p.terminate()
 
-    def filein(self,file):
+    def filein(self, file):
         readaloud = ggwavin()
         compressed = readaloud.ggwave_from_file(file)
         for each in compressed:
-            if each is None:
-                print("Error, skipping none.")
+            if not each or not isinstance(each, str) or len(each) < 3:
+                print("[Skip] Invalid or empty signal:", repr(each))
                 continue
             try:
                 phrase = self.middleman.decode(each)
-                print("Recieved text:",phrase)
+                print("Received text:", phrase)
             except Exception as e:
-                print("[Decode Error]", e)
+                print("[Decode Error]", e, "| Raw:", repr(each))
 
-    def fileout(self,file):
+    def fileout(self, file):
         talksay = ggwavout(file)
         phrase = input("Enter a phrase: ")
         print(self.voice_map.keys())
         voice = input("Enter a voice: ")
         codephrase = self.middleman.encode(phrase)
-        talksay.out(codephrase,self.voice_map[voice])
+        talksay.out(codephrase, self.voice_map[voice])
 
 Alex = translator()
-

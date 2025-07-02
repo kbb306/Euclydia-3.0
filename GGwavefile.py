@@ -1,5 +1,4 @@
 import ggwave
-import pyaudio
 import ffmpeg
 import subprocess
 import numpy as np
