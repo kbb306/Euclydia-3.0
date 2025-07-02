@@ -34,7 +34,7 @@ class Speech:
 
     def playback(self):
         p = pyaudio.PyAudio()
-        self.waveform = ggwave.encode(self.codephrase, self.voice, volume = 20)
+        self.waveform = ggwave.encode(self.phrase, self.voice, volume = 20)
         stream = p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
         stream.write(self.waveform, len(self.waveform)//4)
         stream.stop_stream()
