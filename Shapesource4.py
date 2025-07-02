@@ -109,6 +109,7 @@ class Shape(turtle.Turtle):
     minsize = 6.0
     def __init__(self,name,sides,length,X,Y,color,heading,voice,line_file,screen,colorlist,minsize=minsize): #pass screen from Euclydia
         super().__init__()
+        self.alive = True
         self.X = X
         self.Y = Y
         self.name = name
@@ -137,6 +138,7 @@ class Shape(turtle.Turtle):
 
 
     def delete(self):
+        self.alive = False
         """Remove the shape from the screen and from the registry."""
         # Hide and clear the turtle
         self.hideturtle()
@@ -153,7 +155,7 @@ class Shape(turtle.Turtle):
                 del self.__class__.registry[to_delete]
 
         # Optionally, remove from screen updates
-        self._destroy()  # Private call to ensure the turtle object is invalidated
+        
 
 
     def voice_setup(self):
@@ -241,12 +243,15 @@ class Shape(turtle.Turtle):
 
     def start_life(self):
         def tick():
-            try:
-                self.move()
-                self.screen.ontimer(tick, 500 + int(random.random() * 500))
-                if random.randint(0, 500) == 5:
-                    self.say()
-            except turtle.Terminator:
+            if self.alive:
+                try:
+                    self.move()
+                    self.screen.ontimer(tick, 500 + int(random.random() * 500))
+                    if random.randint(0, 500) == 5:
+                        self.say()
+                except turtle.Terminator:
+                    print(f"[Turtle Error] Shape {self.name} was terminated.")
+            else:
                 print(f"[Turtle Error] Shape {self.name} was terminated.")
         tick()
 
