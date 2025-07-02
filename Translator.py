@@ -134,5 +134,7 @@ class translator():
             elif choice == 5:
                 print("Goodbye!")
                 break
-        
+
+
+Alex = translator()       
                     
