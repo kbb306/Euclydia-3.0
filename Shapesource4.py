@@ -8,6 +8,7 @@ import threading
 import os
 import numpy as np
 import tkinter as tk
+from smaz_encode import smaz_wrapper
 
 
 speech_window = None
@@ -23,17 +24,17 @@ class Speech:
     def __init__(self,phrase,voice):
         self.phrase = phrase
         self.voice = voice
+        self.translator = smaz_wrapper()
         try:
-            from smaz import compress
-            self.codephrase = compress(self.phrase).encode('latin1')
+            self.codephrase = self.translator.encode(self.codephrase)
         
         except Exception:
             #print("[Compression] All methods failed, using raw phrase.")
-            self.codephrase = self.phrase.encode("utf-8")
+            self.codephrase = self.phrase.encode("latin1")
 
     def playback(self):
         p = pyaudio.PyAudio()
-        self.waveform = ggwave.encode(self.codephrase.decode('latin1'), self.voice, volume = 20)
+        self.waveform = ggwave.encode(self.codephrase, self.voice, volume = 20)
         stream = p.open(format=pyaudio.paFloat32, channels=1, rate=48000, output=True, frames_per_buffer=4096)
         stream.write(self.waveform, len(self.waveform)//4)
         stream.stop_stream()
