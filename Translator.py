@@ -4,7 +4,7 @@ import ggwave
 import pyaudio
 from GGwavefile import *
 from smaz_encode import *
-
+from FileIn import *
 class translator():
     def __init__(self):
         self.voice_map = {
@@ -91,36 +91,9 @@ class translator():
         p.terminate()
 
     def filein(self, filename: str):
-        print("[DEBUG] Starting decode loop...")
-        audio = self.read_audio(filename)
-        instance = ggwave.init()
+        ggwave_from_file(filename)
 
-        decoded_count = 0
-
-        for chunk in audio:
-            if not chunk:
-                print("[DEBUG] No data read from ffmpeg.")
-                continue
-
-            res = ggwave.decode(instance, chunk)
-            if res is not None:
-                print(f"[DEBUG] Raw decode: {repr(res)}")
-                try:
-                    codephrase = res.decode('latin1')
-                    phrase = self.middleman.decode(codephrase)
-                    print("Received text:", phrase)
-                    decoded_count += 1
-                except Exception as e:
-                    print("[Decode Error]", e, "| Raw:", repr(res))
-            else:
-                print("[DEBUG] Chunk did not decode.")
-
-        ggwave.free(instance)
-
-        print(f"[DEBUG] Decoded {decoded_count} messages.")
-        if decoded_count == 0:
-            print("[WARN] No signals decoded from file.")
-
+        
     def fileout(self, file):
         talksay = ggwavout(file)
         phrase = input("Enter a phrase: ")
