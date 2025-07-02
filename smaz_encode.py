@@ -14,8 +14,8 @@ class smaz_wrapper:
     def decode(codephrase: str) -> str:
         decoded = b91_decode(codephrase)
         # smaz.decompress expects str, not bytes
-        if isinstance(decoded, bytes):
-            decoded = decoded.decode("latin1")  # or utf-8 if consistent
+    
+        decoded = decoded.decode("latin1")  # or utf-8 if consistent
         return smaz.decompress(decoded)
 
         
