@@ -24,7 +24,9 @@ class translator():
                                 2. Listen for a phrase in Euclydian
                                 3. Decode a recording.
                                 4. Create a recording
-                                5. Quit"""))
+                                5. Quit
+                                
+                               Selection: """))
             if choice == 1:
                 self.say()
             elif choice == 2:
