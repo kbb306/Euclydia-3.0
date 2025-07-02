@@ -97,7 +97,8 @@ class translator():
         phrase = input("Enter a phrase: ")
         print(self.voice_map.keys())
         voice = input("Enter a voice: ")
-        talksay.out(phrase,self.voice_map[voice])
+        codephrase = self.middleman.encode(phrase)
+        talksay.out(codephrase,self.voice_map[voice])
 
 Alex = translator()
 
