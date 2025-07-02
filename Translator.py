@@ -91,7 +91,12 @@ class translator():
         phrase = self.middleman.decode(compressed)
         print(phrase)
 
-    def fileout(self):
-        pass
+    def fileout(self,file):
+        talksay = ggwavout(file)
+        phrase = input("Enter a phrase: ")
+        print(self.voice_map.keys())
+        voice = input("Enter a voice: ")
+        talksay.out(phrase,self.voice_map[voice])
+        
 Alex = translator()
 
