@@ -91,7 +91,9 @@ class translator():
         p.terminate()
 
     def filein(self, filename: str):
-        ggwave_from_file(filename)
+        phrase = ggwave_from_file(filename)
+        out = self.middleman.decode(phrase)
+        print(out)
 
         
     def fileout(self, file):
