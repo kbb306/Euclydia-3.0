@@ -9,6 +9,5 @@ class smaz_wrapper:
     @staticmethod
     def decode(codephrase: str) -> str:
         """Decode a latin1-safe string to original text."""
-        compressed = codephrase.encode('latin1')  # back to bytes
-        decompressed = smaz.decompress(compressed)
+        decompressed = smaz.decompress(codephrase)
         return decompressed
