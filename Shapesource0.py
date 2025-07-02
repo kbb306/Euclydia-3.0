@@ -84,6 +84,9 @@ class Shape(turtle.Turtle):
         super().__init__()
         self.X = X
         self.Y = Y
+        # keep track of initial position
+        self.centerX = X
+        self.centerY = Y
         self.name = name
         self.angle = heading
         self.sides = float(sides)
@@ -107,6 +110,9 @@ class Shape(turtle.Turtle):
         scale = max(math.sqrt(self.get_area()) / 10, minsize)
         self.shapesize(scale)
         self.pencolor("DarkGrey")
+        self.penup()
+        # move to the starting coordinates
+        self.goto(self.centerX, self.centerY)
 
 
     def delete(self):
@@ -144,10 +150,13 @@ class Shape(turtle.Turtle):
     
     def set_X(self, X):
          self.centerX = float(X)
-         self.xcor(self.centerX)
+         # update turtle x-coordinate
+         self.setx(self.centerX)
 
     def set_Y(self, Y):
          self.centerY = float(Y)
+         # update turtle y-coordinate
+         self.sety(self.centerY)
 
 
     def get_area(self):
