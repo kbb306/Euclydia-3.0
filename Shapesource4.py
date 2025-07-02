@@ -9,6 +9,7 @@ import os
 import numpy as np
 import tkinter as tk
 
+
 speech_window = None
 def init_speech_window():
     global speech_window, speech_text
