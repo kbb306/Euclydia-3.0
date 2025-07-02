@@ -8,12 +8,6 @@ import threading
 import os
 import numpy as np
 import tkinter as tk
-try:
-    from smaz import compress, decompress
-except:
-    import brotli
-finally: 
-    import lz4.frame 
 
 speech_window = None
 def init_speech_window():
@@ -29,11 +23,20 @@ class Speech:
         self.phrase = phrase
         self.voice = voice
         try:
+            from smaz import compress
             self.codephrase = compress(self.phrase)
-        except ImportError:
-            self.codephrase = brotli.compress(self.phrase)
-        except ImportError:
-            self.codephrase = lz4.frame.compress(self.phrase)
+        except Exception:
+                try:
+                    import brotli
+                    self.codephrase = brotli.compress(self.phrase.encode("utf-8"))
+                except Exception:
+                    try:
+                        import lz4.frame
+                        self.codephrase = lz4.frame.compress(self.phrase.encode("utf-8"))
+                    except Exception:
+                        #print("[Compression] All methods failed, using raw phrase.")
+                        self.codephrase = self.phrase.encode("utf-8")
+
     def playback(self):
         p = pyaudio.PyAudio()
         self.waveform = ggwave.encode(self.codephrase, self.voice, volume = 20)
