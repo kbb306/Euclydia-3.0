@@ -40,7 +40,7 @@ class translator():
 
         self.p.terminate()
 
-    def file(self, file):
+    def filein(self, file):
         # Open the .wav file
         wf = wave.open(file, 'rb')
 
@@ -69,5 +69,30 @@ class translator():
         finally:
             ggwave.free(instance)
             wf.close()
-
+    
+    def main(self):
+        choice = 0
+        while True:
+            choice = int(input("""Say, listen, or input file?
+                        1. Say
+                        2. Listen
+                        3. Input file
+                        4. Output file
+                        
+                        Choice: """))
             
+            if choice == 1:
+                phrase = input("Enter a short phrase (<100 characters): ")
+                self.say(phrase)
+
+            elif choice == 2:
+                self.listen()
+            
+            elif choice == 3:
+                path = input("Enter file path: ")
+                self.filein(path)
+
+            elif choice == 4:
+                pass
+        
+                    
