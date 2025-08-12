@@ -315,5 +315,6 @@ class Shape(turtle.Turtle):
             speech_text.see(tk.END)
 
         threading.Thread(target=speech.playback, daemon=True).start()
-
+    def drive(self):
+        pass
         
