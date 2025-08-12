@@ -318,9 +318,9 @@ class Shape(turtle.Turtle):
 
         threading.Thread(target=speech.playback, daemon=True).start()
     def drive(self):
-        self.auto = True
-    def stop(self):
         self.auto = False
+    def stop(self):
+        self.auto = True
     def driveforward(self):
         if not self.auto:
             self.forward(10)

@@ -147,21 +147,44 @@ def main():
         else:
             print("Invalid option.")
 
+# at top of file
+import time
+
 def drive(Euclydia):
-    print("""Current Population:""")
+    print("Current Population:")
     for each in list(Euclydia.keys()):
         print(each)
     key = "Why did you do it?"
     while key not in list(Euclydia.keys()):
         key = input("Select a shape: ")
     player = Euclydia[key]
-    print("Press Q to stop.")
-    player.drive()
+
+    print("Drive mode: W/A/S/D to move, Q to quit.")
+    player.drive()  # start in manual mode (auto = False)
+
+    driving = True
+    def exit_drive():
+        nonlocal driving
+        driving = False
+        player.stop()
+
     wn.listen()
-    wn.onkeypress(player.driveforward,"W")
-    wn.onkeypress(player.driveback, "S")
-    wn.onkeypress(player.turnright, "D")
-    wn.onkeypress(player.turnleft, "A")
-    wn.onkeypress(player.stop, "Q")
+    wn.onkeypress(player.driveforward, "w")
+    wn.onkeypress(player.driveback,  "s")
+    wn.onkeypress(player.turnright,  "d")
+    wn.onkeypress(player.turnleft,   "a")
+    wn.onkeypress(exit_drive,        "q")
+
+    # Block here until Q
+    while driving:
+        wn.update()
+        time.sleep(0.01)
+
+    # Unbind keys to avoid leaking controls into menu
+    for k in ("w","a","s","d","q"):
+        wn.onkeypress(None, k)
+
+    print("Exited drive mode.")
+
 main()
 wn.mainloop()
