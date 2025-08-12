@@ -239,3 +239,17 @@ class Shape(turtle.Turtle):
     def drive(self):
         pass
 
+    def stop(self):
+        pass
+
+    def driveforward(self):
+        pass
+
+    def driveback(self):
+        pass
+
+    def turnright(self):
+        pass
+
+    def turnleft(self):
+        pass
