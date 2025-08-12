@@ -111,6 +111,7 @@ class Shape(turtle.Turtle):
     def __init__(self,name,sides,length,X,Y,color,heading,voice,line_file,screen,colorlist,minsize=minsize): #pass screen from Euclydia
         super().__init__()
         self.alive = True
+        self.auto = True
         self.X = X
         self.Y = Y
         # store center coordinates for easier access
@@ -221,12 +222,13 @@ class Shape(turtle.Turtle):
     def move(self):
         x, y = self.pos()
         width, height = self.bounds
+        if self.auto:
         # Slight random turn every so often (5% chance)
-        if random.random() < 0.05:
-            self.setheading(self.heading() + random.uniform(-10, 10))
+            if random.random() < 0.05:
+                self.setheading(self.heading() + random.uniform(-10, 10))
 
-        # Constant slow forward motion
-        self.forward(3)
+            # Constant slow forward motion
+            self.forward(3)
 
         # Handle collision with other shapes
         self.collisions()
@@ -315,6 +317,8 @@ class Shape(turtle.Turtle):
             speech_text.see(tk.END)
 
         threading.Thread(target=speech.playback, daemon=True).start()
+        
     def drive(self):
+        self.auto = False
         pass
         
