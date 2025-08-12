@@ -295,28 +295,29 @@ class Shape(turtle.Turtle):
 
 
     def say(self):
-        try:
-            phrase = random.choice(self.read())
-        except Exception as e:
-            print(f"[Phrase Error] {e}")
-            phrase = "WHY DID YOU DO IT?"
+        if self.auto:
+            try:
+                phrase = random.choice(self.read())
+            except Exception as e:
+                print(f"[Phrase Error] {e}")
+                phrase = "WHY DID YOU DO IT?"
 
-        voice_map = {
-            "FC": 2,
-            "FA": 1,
-            "MC": 8,
-            "MA": 7,
-            "SC": 0,
-            "EU": 6,
-        }
+            voice_map = {
+                "FC": 2,
+                "FA": 1,
+                "MC": 8,
+                "MA": 7,
+                "SC": 0,
+                "EU": 6,
+            }
 
-        voice_id = voice_map.get(self.voice, 8)  # Default to 'MA' if unknown
-        speech = Speech(phrase,voice_id)
-        if speech_window and speech_window.winfo_exists():
-            speech_text.insert(tk.END, f"{self.name} says: {phrase}\n")
-            speech_text.see(tk.END)
+            voice_id = voice_map.get(self.voice, 8)  # Default to 'MA' if unknown
+            speech = Speech(phrase,voice_id)
+            if speech_window and speech_window.winfo_exists():
+                speech_text.insert(tk.END, f"{self.name} says: {phrase}\n")
+                speech_text.see(tk.END)
 
-        threading.Thread(target=speech.playback, daemon=True).start()
+            threading.Thread(target=speech.playback, daemon=True).start()
     def drive(self):
         self.auto = False
     def stop(self):
