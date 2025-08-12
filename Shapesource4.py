@@ -317,8 +317,19 @@ class Shape(turtle.Turtle):
             speech_text.see(tk.END)
 
         threading.Thread(target=speech.playback, daemon=True).start()
-        
     def drive(self):
+        self.auto = True
+    def stop(self):
         self.auto = False
-        pass
-        
+    def driveforward(self):
+        if not self.auto:
+            self.forward(10)
+    def driveback(self):
+        if not self.auto:
+            self.back(10)
+    def turnright(self):
+        if not self.auto:
+            self.right(45)
+    def turnleft(self):
+        if not self.auto:
+            self.left(45)

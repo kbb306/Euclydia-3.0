@@ -154,6 +154,14 @@ def drive(Euclydia):
     key = "Why did you do it?"
     while key not in list(Euclydia.keys()):
         key = input("Select a shape: ")
-    Euclydia[key].drive()
+    player = Euclydia[key]
+    print("Press Q to stop.")
+    player.drive()
+    wn.listen()
+    wn.onkeypress(player.driveforward,"W")
+    wn.onkeypress(player.driveback, "S")
+    wn.onkeypress(player.turnright, "D")
+    wn.onkeypress(player.turnleft, "A")
+    wn.onkeypress(player.stop, "Q")
 main()
 wn.mainloop()
