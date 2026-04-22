@@ -5,7 +5,6 @@ from abc import ABC
 import ggwave
 import pyaudio
 import threading
-import os
 import numpy as np
 import tkinter as tk
 from smaz_encode import smaz_wrapper
